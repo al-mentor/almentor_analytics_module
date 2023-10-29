@@ -25,7 +25,7 @@ To use this package, follow these steps:
    dependencies:
      almentor_analytics_module:
        git:
-         url: https://github.com/al-mentor/flutter_analytics_module
+         url: https://github.com/al-mentor/almentor_analytics_module.git
 ```
 -  Import the package in your dart file where you want to use it by adding the following line at the top of the file:
 
