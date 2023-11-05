@@ -1,7 +1,7 @@
 import 'package:almentor_analytics_module/events_name.dart';
 
 extension EventNameExtension on EventName {
-  String get value {
+  String get valueWithFormattedDash {
     switch (this) {
       case EventName.loginPageLoadedEvent:
         return 'login_page_loaded';
@@ -97,6 +97,105 @@ extension EventNameExtension on EventName {
         return 'course_saved_event';
       case EventName.courseEnrollmentStartedEvent:
         return 'course_enrollment_started';
+    }
+  }
+
+  String get valueWithFormattedCamelCase {
+    switch (this) {
+      case EventName.loginPageLoadedEvent:
+        return 'Login Page Loaded';
+      case EventName.loginPageExitEvent:
+        return 'Login Page Exit';
+      case EventName.loginWithSocialClickedEvent:
+        return 'Login With Social Clicked';
+      case EventName.socialLoginStartedEvent:
+        return 'Social Login Started';
+      case EventName.socialLoginCompletedEvent:
+        return 'Social Login Completed';
+      case EventName.socialLoginFailedEvent:
+        return 'Social Login Failed';
+      case EventName.emailLoginStartedEvent:
+        return 'Email Login Started';
+      case EventName.emailEnteredEvent:
+        return 'Email Entered';
+      case EventName.emailValidationFailedEvent:
+        return 'Email Validation Failed';
+      case EventName.passwordEnteredEvent:
+        return 'Password Entered';
+      case EventName.passwordValidationFailedEvent:
+        return 'Password Validation Failed';
+      case EventName.loginButtonClickedEvent:
+        return 'Login Button Clicked';
+      case EventName.loginSuccessEvent:
+        return 'Login Success';
+      case EventName.loginFailedEvent:
+        return 'Login Failed';
+      case EventName.forgetPasswordClickedEvent:
+        return 'Forget Password Clicked';
+      case EventName.searchPerformedEvent:
+        return 'Search Performed';
+      case EventName.searchResultClickedEvent:
+        return 'Search Result Clicked';
+      case EventName.searchResultAbandonedEvent:
+        return 'Search Result Abandoned';
+      case EventName.searchResultFilterAppliedEvent:
+        return 'Search Result Filter Applied';
+      case EventName.searchResultSortedEvent:
+        return 'Search Result Sorted';
+      case EventName.searchSuggestionSelectedEvent:
+        return 'Search Suggestion Selected';
+      case EventName.searchPageViewedEvent:
+        return 'Search Page Viewed';
+      case EventName.searchPageExitedEvent:
+        return 'Search Page Exited';
+      case EventName.categoryClickedEvent:
+        return 'Category Clicked';
+      case EventName.aboutAlmentorClickedEvent:
+        return 'About Almentor Clicked';
+      case EventName.helpAndSupportClickedEvent:
+        return 'Help and Support Clicked';
+      case EventName.languageChangedEvent:
+        return 'Language Changed';
+      case EventName.termsAndConditionsClickedEvent:
+        return 'Terms and Conditions Clicked';
+      case EventName.privacyPoliciesClickedEvent:
+        return 'Privacy Policies Clicked';
+      case EventName.logoutClickedEvent:
+        return 'Logout Clicked';
+      case EventName.logoutConfirmedEvent:
+        return 'Logout Confirmed';
+      case EventName.logoutCanceledEvent:
+        return 'Logout Canceled';
+      case EventName.myCertificateAccessedEvent:
+        return 'My Certificate Accessed';
+      case EventName.aboutUsViewedEvent:
+        return 'About Us Viewed';
+      case EventName.helpAndSupportDialogOpenedEvent:
+        return 'Help and Support Dialog Opened';
+      case EventName.myLearningPageOpenedEvent:
+        return 'My Learning Page Opened';
+      case EventName.courseResumedEvent:
+        return 'Course Resumed';
+      case EventName.courseDetailsViewedEvent:
+        return 'Course Details Viewed';
+      case EventName.courseSearchEvent:
+        return 'Course Search';
+      case EventName.savedCourseAddedEvent:
+        return 'Saved Course Added';
+      case EventName.completedCourseCardViewedEvent:
+        return 'Completed Course Card Viewed';
+      case EventName.courseCompletionMarkedEvent:
+        return 'Course Completion Marked';
+      case EventName.savedCourseRemovedEvent:
+        return 'Saved Course Removed';
+      case EventName.courseCardClickedEvent:
+        return 'Course Card Clicked';
+      case EventName.courseLessonResumedEvent:
+        return 'Course Lesson Resumed';
+      case EventName.courseSavedEvent:
+        return 'Course Saved Event';
+      case EventName.courseEnrollmentStartedEvent:
+        return 'Course Enrollment Started';
     }
   }
 }

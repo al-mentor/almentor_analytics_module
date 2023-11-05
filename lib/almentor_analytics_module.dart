@@ -31,21 +31,25 @@ class AlmentorAnalyticsModule {
           eventName: eventName, eventValue: eventValue);
     }
     if (allowAppsFlyerEvent && AppsFlyerSDK.appsflyerSdk != null) {
-      await AppsFlyerSDK.logAppsFlyerEvent(eventName.value, eventValue);
+      await AppsFlyerSDK.logAppsFlyerEvent(
+          eventName.valueWithFormattedCamelCase, eventValue);
     }
     if (allowMixpanelEvent && MixPanelSdk.mixPanelSdk != null) {
-      MixPanelSdk.logMixpanelEvent(eventName.value, eventValue);
+      MixPanelSdk.logMixpanelEvent(
+          eventName.valueWithFormattedCamelCase, eventValue);
     }
   }
 
   Future<void> submitFirebaseAnalyticsEvent(
       {required EventName eventName, dynamic eventValue}) async {
     try {
-      await FirebaseAnalytics.instance
-          .logEvent(name: eventName.value, parameters: eventValue);
-      debugPrint('${eventName.value} Event logged Successfully');
+      await FirebaseAnalytics.instance.logEvent(
+          name: eventName.valueWithFormattedDash, parameters: eventValue);
+      debugPrint(
+          '${eventName.valueWithFormattedDash} Event logged Successfully');
     } catch (e) {
-      debugPrint('${eventName.value} Event logged failed with Exception $e');
+      debugPrint(
+          '${eventName.valueWithFormattedDash} Event logged failed with Exception $e');
     }
   }
 }
