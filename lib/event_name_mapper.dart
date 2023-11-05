@@ -8,13 +8,22 @@ extension EventNameExtension on EventName {
     if (result.startsWith('_')) {
       result = result.substring(1);
     }
-    return result.replaceAll('Event', '').toLowerCase();
+    return result.replaceAll('_event', '').toLowerCase();
   }
 
   String get convertToTitleCase {
     String result = name.replaceAllMapped(RegExp(r'([a-z])([A-Z])'), (match) {
       return '${match.group(1)!} ${match.group(2)!.toLowerCase()}';
     });
-    return result.replaceAll("Event", "").trim();
+    result = result.replaceAll('event', '');
+    List<String> words = result.split(' ');
+    words = words.map((word) {
+      if (word.isNotEmpty) {
+        return word[0].toUpperCase() + word.substring(1);
+      }
+      return word;
+    }).toList();
+
+    return words.join(' ');
   }
 }

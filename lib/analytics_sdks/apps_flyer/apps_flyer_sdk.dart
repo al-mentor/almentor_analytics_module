@@ -36,5 +36,13 @@ class AppsFlyerSDK {
       eventName.convertToTitleCase,
       eventValue,
     );
+
+    debugPrint('potato');
+    debugPrint(eventName.convertToTitleCase);
+    debugPrint(eventName.convertToTitleCase);
+    debugPrint(eventName.convertToTitleCase);
+    debugPrint(eventName.convertToTitleCase);
+    debugPrint(eventName.convertToTitleCase);
+    debugPrint(eventName.convertToTitleCase);
   }
 }
