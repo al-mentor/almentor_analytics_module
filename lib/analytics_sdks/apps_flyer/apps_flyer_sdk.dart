@@ -1,3 +1,5 @@
+import 'package:almentor_analytics_module/event_name_mapper.dart';
+import 'package:almentor_analytics_module/events_name.dart';
 import 'package:appsflyer_sdk/appsflyer_sdk.dart';
 import 'package:flutter/foundation.dart';
 import 'package:almentor_analytics_module/analytics_sdks/apps_flyer/apps_flyer_constant.dart'
@@ -27,11 +29,11 @@ class AppsFlyerSDK {
   }
 
   static Future<void> logAppsFlyerEvent(
-    String eventName,
+    EventName eventName,
     dynamic eventValue,
   ) async {
     await _appsflyerSdk!.logEvent(
-      eventName,
+      eventName.convertToTitleCase,
       eventValue,
     );
   }

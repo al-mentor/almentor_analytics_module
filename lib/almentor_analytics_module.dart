@@ -31,12 +31,10 @@ class AlmentorAnalyticsModule {
           eventName: eventName, eventValue: eventValue);
     }
     if (allowAppsFlyerEvent && AppsFlyerSDK.appsflyerSdk != null) {
-      await AppsFlyerSDK.logAppsFlyerEvent(
-          eventName.valueWithFormattedCamelCase, eventValue);
+      await AppsFlyerSDK.logAppsFlyerEvent(eventName, eventValue);
     }
     if (allowMixpanelEvent && MixPanelSdk.mixPanelSdk != null) {
-      MixPanelSdk.logMixpanelEvent(
-          eventName.valueWithFormattedCamelCase, eventValue);
+      MixPanelSdk.logMixpanelEvent(eventName, eventValue);
     }
   }
 
@@ -44,12 +42,12 @@ class AlmentorAnalyticsModule {
       {required EventName eventName, dynamic eventValue}) async {
     try {
       await FirebaseAnalytics.instance.logEvent(
-          name: eventName.valueWithFormattedDash, parameters: eventValue);
+          name: eventName.convertToSnakeCase, parameters: eventValue);
       debugPrint(
-          '${eventName.valueWithFormattedDash} Event logged Successfully');
+          '${eventName.convertToSnakeCase} Event logged Successfully');
     } catch (e) {
       debugPrint(
-          '${eventName.valueWithFormattedDash} Event logged failed with Exception $e');
+          '${eventName.convertToSnakeCase} Event logged failed with Exception $e');
     }
   }
 }

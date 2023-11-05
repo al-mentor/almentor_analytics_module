@@ -1,3 +1,5 @@
+import 'package:almentor_analytics_module/event_name_mapper.dart';
+import 'package:almentor_analytics_module/events_name.dart';
 import 'package:mixpanel_flutter/mixpanel_flutter.dart';
 
 class MixPanelSdk {
@@ -13,9 +15,9 @@ class MixPanelSdk {
   }
 
   static void logMixpanelEvent(
-    String eventName,
+    EventName eventName,
     dynamic eventValue,
   ) {
-    _mixPanelSdk!.track(eventName, properties: eventValue);
+    _mixPanelSdk!.track(eventName.convertToTitleCase, properties: eventValue);
   }
 }
