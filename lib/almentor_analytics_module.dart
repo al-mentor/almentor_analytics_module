@@ -43,11 +43,11 @@ class AlmentorAnalyticsModule {
     try {
       await FirebaseAnalytics.instance.logEvent(
           name: eventName.convertToSnakeCase, parameters: eventValue);
-      debugPrint(
-          '${eventName.convertToSnakeCase} Event logged Successfully');
+      // debugPrint(
+      //     '${eventName.convertToSnakeCase} Event logged Successfully');
     } catch (e) {
-      debugPrint(
-          '${eventName.convertToSnakeCase} Event logged failed with Exception $e');
+      // debugPrint(
+      //     '${eventName.convertToSnakeCase} Event logged failed with Exception $e');
     }
   }
 }
