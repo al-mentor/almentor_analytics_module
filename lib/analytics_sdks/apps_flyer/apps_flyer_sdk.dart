@@ -28,13 +28,26 @@ class AppsFlyerSDK {
     );
   }
 
+
+
   static Future<void> logAppsFlyerEvent(
-    EventName eventName,
-    dynamic eventValue,
-  ) async {
-    await _appsflyerSdk!.logEvent(
-      eventName.convertToTitleCase,
-      eventValue,
-    );
+      EventName eventName,
+      dynamic eventValue,
+      ) async {
+    if (_appsflyerSdk != null) {
+      if (eventValue is Map<dynamic, dynamic>) {
+        await _appsflyerSdk!.logEvent(
+          eventName.convertToTitleCase,
+          eventValue,
+        );
+      } else {
+        debugPrint("Invalid eventValue type. Expected Map<dynamic, dynamic>.");
+        // Handle the invalid type case appropriately
+      }
+    } else {
+      debugPrint("AppsFlyerSDK is null. Unable to log event.");
+      // Handle null case appropriately
+    }
   }
+
 }

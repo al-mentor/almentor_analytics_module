@@ -53,11 +53,21 @@ class AlmentorAnalyticsModule {
     );
   }
 
-  Future<void> submitFirebaseAnalyticsEvent(
-      {required EventName eventName, dynamic eventValue}) async {
-    await FirebaseAnalytics.instance
-        .logEvent(name: eventName.convertToSnakeCase, parameters: eventValue);
+  Future<void> submitFirebaseAnalyticsEvent({
+    required EventName eventName,
+    dynamic eventValue,
+  }) async {
+    if (eventValue is Map<String, dynamic>) {
+      await FirebaseAnalytics.instance.logEvent(
+        name: eventName.convertToSnakeCase,
+        parameters: eventValue,
+      );
+    } else {
+      print("Invalid eventValue type. Expected Map<String, dynamic>.");
+      // Handle the invalid type case appropriately
+    }
   }
+
 
   void updateEventsList(
     EventName eventName,
