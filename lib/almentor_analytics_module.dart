@@ -20,8 +20,10 @@ class AlmentorAnalyticsModule {
   final List<EventModule> submittedEvents = [];
 
   Future<void> init() async {
+    try{
     await AppsFlyerSDK.initAppsFlyer();
     await MixPanelSdk.initMixpanelSdk();
+    }catch(ex){}
   }
 
   Future<void> submitEvent({
@@ -31,20 +33,27 @@ class AlmentorAnalyticsModule {
     bool allowAppsFlyerEvent = true,
     bool allowMixpanelEvent = true,
   }) async {
+    try{
     if (allowFirebaseEvents) {
-      await submitFirebaseAnalyticsEvent(
+      submitFirebaseAnalyticsEvent(
           eventName: eventName,
           eventValue: isEventValueValidMap(eventValue) ? eventValue : null);
+          }catch(ex){}
     }
     if (allowAppsFlyerEvent && AppsFlyerSDK.appsflyerSdk != null) {
-      await AppsFlyerSDK.logAppsFlyerEvent(
+      try{
+      AppsFlyerSDK.logAppsFlyerEvent(
           eventName, isEventValueValidMap(eventValue) ? eventValue : null);
+      }catch(ex){}
     }
     if (allowMixpanelEvent && MixPanelSdk.mixPanelSdk != null) {
+      try{
       MixPanelSdk.logMixpanelEvent(
           eventName, isEventValueValidMap(eventValue) ? eventValue : null);
+      }catch(ex){}
     }
 
+try{
     updateEventsList(
       eventName,
       eventValue,
@@ -52,6 +61,7 @@ class AlmentorAnalyticsModule {
       allowAppsFlyerEvent,
       allowMixpanelEvent,
     );
+}catch(ex){}
   }
 
   Future<void> submitFirebaseAnalyticsEvent(
