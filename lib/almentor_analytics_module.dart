@@ -20,10 +20,10 @@ class AlmentorAnalyticsModule {
   final List<EventModule> submittedEvents = [];
 
   Future<void> init() async {
-    try{
-    await AppsFlyerSDK.initAppsFlyer();
-    await MixPanelSdk.initMixpanelSdk();
-    }catch(ex){}
+    try {
+      await AppsFlyerSDK.initAppsFlyer();
+      await MixPanelSdk.initMixpanelSdk();
+    } catch (ex) {}
   }
 
   Future<void> submitEvent({
@@ -33,42 +33,36 @@ class AlmentorAnalyticsModule {
     bool allowAppsFlyerEvent = true,
     bool allowMixpanelEvent = true,
   }) async {
-    try{
     if (allowFirebaseEvents) {
-      try{
-      submitFirebaseAnalyticsEvent(
-          eventName: eventName,
-          eventValue: isEventValueValidMap(eventValue) ? eventValue : null);
-          }catch(ex){}
+      try {
+        submitFirebaseAnalyticsEvent(
+            eventName: eventName, eventValue: isEventValueValidMap(eventValue) ? eventValue : null);
+      } catch (ex) {}
     }
     if (allowAppsFlyerEvent && AppsFlyerSDK.appsflyerSdk != null) {
-      try{
-      AppsFlyerSDK.logAppsFlyerEvent(
-          eventName, isEventValueValidMap(eventValue) ? eventValue : null);
-      }catch(ex){}
+      try {
+        AppsFlyerSDK.logAppsFlyerEvent(eventName, isEventValueValidMap(eventValue) ? eventValue : null);
+      } catch (ex) {}
     }
     if (allowMixpanelEvent && MixPanelSdk.mixPanelSdk != null) {
-      try{
-      MixPanelSdk.logMixpanelEvent(
-          eventName, isEventValueValidMap(eventValue) ? eventValue : null);
-      }catch(ex){}
+      try {
+        MixPanelSdk.logMixpanelEvent(eventName, isEventValueValidMap(eventValue) ? eventValue : null);
+      } catch (ex) {}
     }
 
-try{
-    updateEventsList(
-      eventName,
-      eventValue,
-      allowFirebaseEvents,
-      allowAppsFlyerEvent,
-      allowMixpanelEvent,
-    );
-}catch(ex){}
+    try {
+      updateEventsList(
+        eventName,
+        eventValue,
+        allowFirebaseEvents,
+        allowAppsFlyerEvent,
+        allowMixpanelEvent,
+      );
+    } catch (ex) {}
   }
 
-  Future<void> submitFirebaseAnalyticsEvent(
-      {required EventName eventName, dynamic eventValue}) async {
-    await FirebaseAnalytics.instance
-        .logEvent(name: eventName.convertToSnakeCase, parameters: eventValue);
+  Future<void> submitFirebaseAnalyticsEvent({required EventName eventName, dynamic eventValue}) async {
+    await FirebaseAnalytics.instance.logEvent(name: eventName.convertToSnakeCase, parameters: eventValue);
   }
 
   void updateEventsList(
@@ -78,12 +72,9 @@ try{
     bool isAppsFlyerAllowed,
     bool isMixPanelAllowed,
   ) {
-    final isExists =
-        submittedEvents.any((event) => event.eventName == eventName);
+    final isExists = submittedEvents.any((event) => event.eventName == eventName);
     if (isExists) {
-      submittedEvents[submittedEvents
-              .indexWhere((event) => event.eventName == eventName)]
-          .count++;
+      submittedEvents[submittedEvents.indexWhere((event) => event.eventName == eventName)].count++;
     } else {
       submittedEvents.add(
         EventModule(
