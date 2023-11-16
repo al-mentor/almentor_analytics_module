@@ -35,6 +35,7 @@ class AlmentorAnalyticsModule {
   }) async {
     try{
     if (allowFirebaseEvents) {
+      try{
       submitFirebaseAnalyticsEvent(
           eventName: eventName,
           eventValue: isEventValueValidMap(eventValue) ? eventValue : null);
