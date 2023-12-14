@@ -27,7 +27,7 @@ class AlmentorAnalyticsModule {
     } catch (ex) {}
   }
 
-  Future<List<NavigatorObserver>> getNavigatorObservers() async {
+  List<NavigatorObserver> getNavigatorObservers() {
     return <NavigatorObserver>[
       FirebaseAnalyticsObserver(analytics: FirebaseAnalytics.instance),
     ];
