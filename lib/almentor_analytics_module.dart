@@ -6,6 +6,7 @@ import 'package:almentor_analytics_module/event_module.dart';
 import 'package:almentor_analytics_module/event_name_mapper.dart';
 import 'package:almentor_analytics_module/events_name.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
+import 'package:flutter/material.dart';
 
 class AlmentorAnalyticsModule {
   AlmentorAnalyticsModule._();
@@ -26,6 +27,12 @@ class AlmentorAnalyticsModule {
     } catch (ex) {}
   }
 
+  Future<List<NavigatorObserver>> getNavigatorObservers() async {
+    return <NavigatorObserver>[
+      FirebaseAnalyticsObserver(analytics: FirebaseAnalytics.instance),
+    ];
+  }
+
   Future<void> submitEvent({
     required EventName eventName,
     dynamic eventValue,
@@ -36,17 +43,20 @@ class AlmentorAnalyticsModule {
     if (allowFirebaseEvents) {
       try {
         submitFirebaseAnalyticsEvent(
-            eventName: eventName, eventValue: isEventValueValidMap(eventValue) ? eventValue : null);
+            eventName: eventName,
+            eventValue: isEventValueValidMap(eventValue) ? eventValue : null);
       } catch (ex) {}
     }
     if (allowAppsFlyerEvent && AppsFlyerSDK.appsflyerSdk != null) {
       try {
-        AppsFlyerSDK.logAppsFlyerEvent(eventName, isEventValueValidMap(eventValue) ? eventValue : null);
+        AppsFlyerSDK.logAppsFlyerEvent(
+            eventName, isEventValueValidMap(eventValue) ? eventValue : null);
       } catch (ex) {}
     }
     if (allowMixpanelEvent && MixPanelSdk.mixPanelSdk != null) {
       try {
-        MixPanelSdk.logMixpanelEvent(eventName, isEventValueValidMap(eventValue) ? eventValue : null);
+        MixPanelSdk.logMixpanelEvent(
+            eventName, isEventValueValidMap(eventValue) ? eventValue : null);
       } catch (ex) {}
     }
 
@@ -61,8 +71,10 @@ class AlmentorAnalyticsModule {
     } catch (ex) {}
   }
 
-  Future<void> submitFirebaseAnalyticsEvent({required EventName eventName, dynamic eventValue}) async {
-    await FirebaseAnalytics.instance.logEvent(name: eventName.convertToSnakeCase, parameters: eventValue);
+  Future<void> submitFirebaseAnalyticsEvent(
+      {required EventName eventName, dynamic eventValue}) async {
+    await FirebaseAnalytics.instance
+        .logEvent(name: eventName.convertToSnakeCase, parameters: eventValue);
   }
 
   void updateEventsList(
@@ -72,9 +84,12 @@ class AlmentorAnalyticsModule {
     bool isAppsFlyerAllowed,
     bool isMixPanelAllowed,
   ) {
-    final isExists = submittedEvents.any((event) => event.eventName == eventName);
+    final isExists =
+        submittedEvents.any((event) => event.eventName == eventName);
     if (isExists) {
-      submittedEvents[submittedEvents.indexWhere((event) => event.eventName == eventName)].count++;
+      submittedEvents[submittedEvents
+              .indexWhere((event) => event.eventName == eventName)]
+          .count++;
     } else {
       submittedEvents.add(
         EventModule(
