@@ -24,7 +24,9 @@ class AlmentorAnalyticsModule {
     try {
       await AppsFlyerSDK.initAppsFlyer();
       await MixPanelSdk.initMixpanelSdk();
-    } catch (ex) {}
+    } catch (ex) {
+      print(ex);
+    }
   }
 
   List<NavigatorObserver> getNavigatorObservers() {
@@ -45,19 +47,26 @@ class AlmentorAnalyticsModule {
         submitFirebaseAnalyticsEvent(
             eventName: eventName,
             eventValue: isEventValueValidMap(eventValue) ? eventValue : null);
-      } catch (ex) {}
+      } catch (ex) {
+        print(ex);
+      }
     }
     if (allowAppsFlyerEvent && AppsFlyerSDK.appsflyerSdk != null) {
       try {
         AppsFlyerSDK.logAppsFlyerEvent(
             eventName, isEventValueValidMap(eventValue) ? eventValue : null);
-      } catch (ex) {}
+      } catch (ex) {
+        print(ex);
+
+      }
     }
     if (allowMixpanelEvent && MixPanelSdk.mixPanelSdk != null) {
       try {
         MixPanelSdk.logMixpanelEvent(
             eventName, isEventValueValidMap(eventValue) ? eventValue : null);
-      } catch (ex) {}
+      } catch (ex) {
+        print(ex);
+      }
     }
 
     try {
@@ -68,7 +77,9 @@ class AlmentorAnalyticsModule {
         allowAppsFlyerEvent,
         allowMixpanelEvent,
       );
-    } catch (ex) {}
+    } catch (ex) {
+      print(ex);
+    }
   }
 
   Future<void> submitFirebaseAnalyticsEvent(
