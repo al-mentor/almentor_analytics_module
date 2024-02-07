@@ -1,7 +1,9 @@
 library almentor_analytics_module;
 
 import 'package:almentor_analytics_module/analytics_sdks/apps_flyer/apps_flyer_sdk.dart';
+import 'package:almentor_analytics_module/analytics_sdks/braze/braze_sdk.dart';
 import 'package:almentor_analytics_module/analytics_sdks/mixpanel/mixpanel_sdk.dart';
+import 'package:almentor_analytics_module/analytics_sdks/user_data.dart';
 import 'package:almentor_analytics_module/event_module.dart';
 import 'package:almentor_analytics_module/event_name_mapper.dart';
 import 'package:almentor_analytics_module/events_name.dart';
@@ -24,6 +26,7 @@ class AlmentorAnalyticsModule {
     try {
       await AppsFlyerSDK.initAppsFlyer();
       await MixPanelSdk.initMixpanelSdk();
+      BrazeSdk.initBraze();
     } catch (ex) {
       print(ex);
     }
@@ -39,14 +42,16 @@ class AlmentorAnalyticsModule {
     required EventName eventName,
     dynamic eventValue,
     bool allowFirebaseEvents = true,
-    bool allowAppsFlyerEvent = true,
-    bool allowMixpanelEvent = true,
+    bool allowAppsFlyerEvent = false,
+    bool allowMixpanelEvent = false,
+    bool allowBrazeEvent = false,
   }) async {
     if (allowFirebaseEvents) {
       try {
         submitFirebaseAnalyticsEvent(
-            eventName: eventName,
-            eventValue: isEventValueValidMap(eventValue) ? eventValue : null);
+          eventName: eventName,
+          eventValue: isEventValueValidMap(eventValue) ? eventValue : null,
+        );
       } catch (ex) {
         print(ex);
       }
@@ -54,16 +59,29 @@ class AlmentorAnalyticsModule {
     if (allowAppsFlyerEvent && AppsFlyerSDK.appsflyerSdk != null) {
       try {
         AppsFlyerSDK.logAppsFlyerEvent(
-            eventName, isEventValueValidMap(eventValue) ? eventValue : null);
+          eventName,
+          isEventValueValidMap(eventValue) ? eventValue : null,
+        );
       } catch (ex) {
         print(ex);
-
       }
     }
     if (allowMixpanelEvent && MixPanelSdk.mixPanelSdk != null) {
       try {
         MixPanelSdk.logMixpanelEvent(
-            eventName, isEventValueValidMap(eventValue) ? eventValue : null);
+          eventName,
+          isEventValueValidMap(eventValue) ? eventValue : null,
+        );
+      } catch (ex) {
+        print(ex);
+      }
+    }
+    if (allowBrazeEvent && BrazeSdk.braze != null) {
+      try {
+        BrazeSdk.logBrazeEvent(
+          eventName,
+          isEventValueValidMap(eventValue) ? eventValue : null,
+        );
       } catch (ex) {
         print(ex);
       }
@@ -82,10 +100,64 @@ class AlmentorAnalyticsModule {
     }
   }
 
-  Future<void> submitFirebaseAnalyticsEvent(
-      {required EventName eventName, dynamic eventValue}) async {
-    await FirebaseAnalytics.instance
-        .logEvent(name: eventName.convertToSnakeCase, parameters: eventValue);
+  Future<void> _logUserFirebase(UserData userData) async {
+    await FirebaseAnalytics.instance.setUserId(id: userData.userId);
+    if (userData.phoneNumber != null) {
+      await FirebaseAnalytics.instance.setUserProperty(
+        name: 'phone_Number',
+        value: userData.phoneNumber,
+      );
+    }
+    if (userData.gender != null) {
+      await FirebaseAnalytics.instance.setUserProperty(
+        name: 'gender',
+        value: userData.gender,
+      );
+    }
+    if (userData.language != null) {
+      await FirebaseAnalytics.instance.setUserProperty(
+        name: 'language',
+        value: userData.language,
+      );
+    }
+    if (userData.isSubscribed != null) {
+      await FirebaseAnalytics.instance.setUserProperty(
+        name: 'is_subscribed',
+        value: userData.isSubscribed! ? 'Yes' : 'No',
+      );
+    }
+  }
+
+  Future<void> logUser(
+    UserData userData, {
+    bool allowFirebaseEvents = true,
+    bool allowAppsFlyerEvent = false,
+    bool allowMixpanelEvent = false,
+    bool allowBrazeEvent = false,
+  }) async {
+    if (allowFirebaseEvents) {
+      await _logUserFirebase(userData);
+    }
+    if (allowAppsFlyerEvent) {
+      AppsFlyerSDK.logUser(userData);
+    }
+    if (allowBrazeEvent) {
+      BrazeSdk.logUser(userData);
+    }
+
+    if (allowMixpanelEvent) {
+      MixPanelSdk.logUser(userData);
+    }
+  }
+
+  Future<void> submitFirebaseAnalyticsEvent({
+    required EventName eventName,
+    dynamic eventValue,
+  }) async {
+    await FirebaseAnalytics.instance.logEvent(
+      name: eventName.convertToSnakeCase,
+      parameters: eventValue,
+    );
   }
 
   void updateEventsList(

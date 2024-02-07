@@ -58,13 +58,17 @@ This provides flexibility and customization for your event tracking needs.
 - `allowFirebaseEvents` (default: `true`): Controls whether Firebase Analytics events are allowed.
   Set to `true` to enable Firebase Analytics event tracking or `false` to disable it.
 
-- `allowAppsFlyerEvent` (default: `true`): Controls whether AppsFlyer events are allowed. Set
+- `allowAppsFlyerEvent` (default: `false`): Controls whether AppsFlyer events are allowed. Set
   to `true` to enable AppsFlyer event tracking or `false` to disable it. This feature is dependent
   on the presence of the AppsFlyer SDK in your project.
 
-- `allowMixpanelEvent` (default: `true`): Controls whether Mixpanel events are allowed. Set
+- `allowMixpanelEvent` (default: `false`): Controls whether Mixpanel events are allowed. Set
   to `true` to enable Mixpanel event tracking or `false` to disable it. This feature is dependent on
   the presence of the Mixpanel SDK in your project.
+
+- `allowBrazeEvent` (default: `false`): Controls whether Braze events are allowed. Set
+  to `true` to enable Braze event tracking or `false` to disable it. This feature is dependent on
+  the presence of the Braze SDK in your project.
 
 #### Usage:
 
