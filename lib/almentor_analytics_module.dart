@@ -20,10 +20,10 @@ class AlmentorAnalyticsModule {
 
   final List<EventModule> submittedEvents = [];
 
-  Future<void> init() async {
+  Future<void> init(bool prod) async {
     try {
-      await AppsFlyerSDK.initAppsFlyer();
-      await MixPanelSdk.initMixpanelSdk();
+      await AppsFlyerSDK.initAppsFlyer(prod);
+      await MixPanelSdk.initMixpanelSdk(prod);
     } catch (ex) {
       print(ex);
     }

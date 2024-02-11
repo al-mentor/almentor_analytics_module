@@ -12,15 +12,29 @@ class AppsFlyerSDK {
 
   static AppsflyerSdk? get appsflyerSdk => _appsflyerSdk;
 
-  static final appsFlyerOptions = {
+  static final appsFlyerOptionsProd = {
     "afDevKey": constant.AppsFlyerConstant.appsFlyerDevKey,
     "afAppId": constant.AppsFlyerConstant.getAppID(),
     "isDebug": kDebugMode,
     "timeToWaitForATTUserAuthorization": 5.0
   };
 
-  static Future<void> initAppsFlyer() async {
-    _appsflyerSdk = AppsflyerSdk(appsFlyerOptions);
+  static final appsFlyerOptionsStage = {
+    "afDevKey": constant.AppsFlyerConstant.appsFlyerDevKey,
+    "afAppId": constant.AppsFlyerConstant.getAppID(),
+    "isDebug": kDebugMode,
+    "timeToWaitForATTUserAuthorization": 5.0
+  };
+
+
+  static Future<void> initAppsFlyer(bool prod) async {
+    if(prod){
+      _appsflyerSdk = AppsflyerSdk(appsFlyerOptionsProd);
+
+    }else{
+      _appsflyerSdk = AppsflyerSdk(appsFlyerOptionsStage);
+
+    }
     await _appsflyerSdk?.initSdk(
       registerConversionDataCallback: true,
       registerOnAppOpenAttributionCallback: true,
