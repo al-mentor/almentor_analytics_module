@@ -1,3 +1,4 @@
+import 'package:almentor_analytics_module/analytics_sdks/user_data.dart';
 import 'package:almentor_analytics_module/event_name_mapper.dart';
 import 'package:almentor_analytics_module/events_name.dart';
 import 'package:mixpanel_flutter/mixpanel_flutter.dart';
@@ -18,8 +19,13 @@ class MixPanelSdk {
 
     }else{
       _mixPanelSdk = await Mixpanel.init('e5c9d92fd6fdf110e85a4fecf1fb0298',
-          trackAutomaticEvents: true);
-    }
+          trackAutomaticEvents: true,
+    );
+  }
+
+  static void logUser(UserData userData) {
+    _mixPanelSdk!.registerSuperProperties(userData.toJson());
+  }
 
 
   }
