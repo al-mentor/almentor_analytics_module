@@ -22,7 +22,7 @@ class AppsFlyerSDK {
 
   static final appsFlyerOptionsStage = {
     "afDevKey": constant.AppsFlyerConstant.appsFlyerDevKey,
-    "afAppId": constant.AppsFlyerConstant.getAppID(),
+    "afAppId": constant.AppsFlyerConstant.getAppStageID(),
     "isDebug": kDebugMode,
     "timeToWaitForATTUserAuthorization": 5.0
   };
