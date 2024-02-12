@@ -63,4 +63,5 @@ enum EventName {
   userDataIsSubscribedEvent,
   userDataEndSubscriptionDateEvent,
   userDataFirstSubscriptionDateEvent,
+  subscribeNowEvent,
 }
