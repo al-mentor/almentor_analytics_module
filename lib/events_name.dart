@@ -64,4 +64,9 @@ enum EventName {
   userDataEndSubscriptionDateEvent,
   userDataFirstSubscriptionDateEvent,
   subscribeNowEvent,
+  paymentMethodSelectedEvent,
+  subscribePlanSelectedEvent,
+  couponCodeSubmittedEvent,
+  paymentConfirmationEvent,
+  paymentStatusEvent,
 }
