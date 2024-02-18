@@ -131,9 +131,9 @@ class AlmentorAnalyticsModule {
   Future<void> logUser(
     UserData userData, {
     bool allowFirebaseEvents = true,
-    bool allowAppsFlyerEvent = false,
-    bool allowMixpanelEvent = false,
-    bool allowBrazeEvent = false,
+    bool allowAppsFlyerEvent = true,
+    bool allowMixpanelEvent = true,
+    bool allowBrazeEvent = true,
   }) async {
     if (allowFirebaseEvents) {
       await _logUserFirebase(userData);
