@@ -15,6 +15,12 @@ class BrazeSdk {
   }
 
   static void logUser(UserData userData) {
+    if(_braze == null){
+      initBraze();
+    }
+    if (userData.userId.isEmpty) {
+      return;
+    }
     _braze!.changeUser(userData.userId);
     if (userData.userName != null) {
       _braze!.setFirstName(userData.userName!);
