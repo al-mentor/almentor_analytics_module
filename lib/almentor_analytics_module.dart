@@ -135,6 +135,7 @@ class AlmentorAnalyticsModule {
     bool allowMixpanelEvent = true,
     bool allowBrazeEvent = true,
   }) async {
+    try {
     if (allowFirebaseEvents) {
       await _logUserFirebase(userData);
     }
@@ -147,6 +148,10 @@ class AlmentorAnalyticsModule {
 
     if (allowMixpanelEvent) {
       MixPanelSdk.logUser(userData);
+    }
+
+    } catch (ex) {
+      print(ex);
     }
   }
 
