@@ -22,22 +22,27 @@ class AlmentorAnalyticsModule {
   }
 
   final List<EventModule> submittedEvents = [];
-
-  Future<void> init(bool prod) async {
+  static Function(Object error, StackTrace stackTrace)? onError = (error, stackTrace) {
+    if (kDebugMode) {
+      print(error.toString());
+    }
+  };
+  Future<void> init(bool prod, Function(Object error, StackTrace stackTrace)? onError) async {
+    AlmentorAnalyticsModule.onError = onError;
     try {
       await AppsFlyerSDK.initAppsFlyer(prod);
-    } catch (ex) {
-      print(ex);
+    } catch (error, stackTrace) {
+      AlmentorAnalyticsModule.onError!(error, stackTrace);
     }
     try {
       await MixPanelSdk.initMixpanelSdk(prod);
-    } catch (ex) {
-      print(ex);
+    } catch (error, stackTrace) {
+      AlmentorAnalyticsModule.onError!(error, stackTrace);
     }
     try {
       BrazeSdk.initBraze();
-    } catch (ex) {
-      print(ex);
+    } catch (error, stackTrace) {
+      AlmentorAnalyticsModule.onError!(error, stackTrace);
     }
   }
 
@@ -61,10 +66,8 @@ class AlmentorAnalyticsModule {
           eventName: eventName,
           eventValue: isEventValueValidMap(eventValue) ? eventValue : null,
         );
-      } catch (ex) {
-        if (kDebugMode) {
-          print(ex);
-        }
+      } catch (error, stackTrace) {
+        AlmentorAnalyticsModule.onError!(error, stackTrace);
       }
     }
     if (allowAppsFlyerEvent && AppsFlyerSDK.appsflyerSdk != null) {
@@ -73,10 +76,8 @@ class AlmentorAnalyticsModule {
           eventName,
           isEventValueValidMap(eventValue) ? eventValue : null,
         );
-      } catch (ex) {
-        if (kDebugMode) {
-          print(ex);
-        }
+      } catch (error, stackTrace) {
+        AlmentorAnalyticsModule.onError!(error, stackTrace);
       }
     }
     if (allowMixpanelEvent && MixPanelSdk.mixPanelSdk != null) {
@@ -85,10 +86,8 @@ class AlmentorAnalyticsModule {
           eventName,
           isEventValueValidMap(eventValue) ? eventValue : null,
         );
-      } catch (ex) {
-        if (kDebugMode) {
-          print(ex);
-        }
+      } catch (error, stackTrace) {
+        AlmentorAnalyticsModule.onError!(error, stackTrace);
       }
     }
     if (allowBrazeEvent && BrazeSdk.braze != null) {
@@ -97,10 +96,8 @@ class AlmentorAnalyticsModule {
           eventName,
           isEventValueValidMap(eventValue) ? eventValue : null,
         );
-      } catch (ex) {
-        if (kDebugMode) {
-          print(ex);
-        }
+      } catch (error, stackTrace) {
+        AlmentorAnalyticsModule.onError!(error, stackTrace);
       }
     }
 
@@ -156,35 +153,29 @@ class AlmentorAnalyticsModule {
       if (allowFirebaseEvents) {
         await _logUserFirebase(userData);
       }
-    } catch (e) {
-      if (kDebugMode) {
-        print(e);
-      }
+    } catch (error, stackTrace) {
+      AlmentorAnalyticsModule.onError!(error, stackTrace);
     }
     try {
       if (allowAppsFlyerEvent) {
         AppsFlyerSDK.logUser(userData);
       }
-    } catch (e) {
-      if (kDebugMode) {
-        print(e);
-      }
+    } catch (error, stackTrace) {
+      AlmentorAnalyticsModule.onError!(error, stackTrace);
     }
     try {
       if (allowBrazeEvent) {
         BrazeSdk.logUser(userData);
       }
-    } catch (e) {
-      if (kDebugMode) {
-        print(e);
-      }
+    } catch (error, stackTrace) {
+      AlmentorAnalyticsModule.onError!(error, stackTrace);
     }
     try {
       if (allowMixpanelEvent) {
         MixPanelSdk.logUser(userData);
       }
-    } catch (ex) {
-      print(ex);
+    } catch (error, stackTrace) {
+      AlmentorAnalyticsModule.onError!(error, stackTrace);
     }
   }
 

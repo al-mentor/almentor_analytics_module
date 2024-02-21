@@ -12,8 +12,8 @@ dependencies:
     sdk: flutter
   firebase_analytics: ^10.7.0
   firebase_core: ^2.20.0
-  appsflyer_sdk: ^6.11.1
-  mixpanel_flutter: ^2.1.1
+  appsflyer_sdk: ^6.13.0+1
+  mixpanel_flutter: ^2.2.0
   braze_plugin: ^8.1.0
 
 dev_dependencies:
