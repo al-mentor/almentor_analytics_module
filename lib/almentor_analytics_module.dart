@@ -27,23 +27,17 @@ class AlmentorAnalyticsModule {
     try {
       await AppsFlyerSDK.initAppsFlyer(prod);
     } catch (ex) {
-      if (kDebugMode) {
-        print(ex);
-      }
+      print(ex);
     }
     try {
       await MixPanelSdk.initMixpanelSdk(prod);
     } catch (ex) {
-      if (kDebugMode) {
-        print(ex);
-      }
+      print(ex);
     }
     try {
       BrazeSdk.initBraze();
     } catch (ex) {
-      if (kDebugMode) {
-        print(ex);
-      }
+      print(ex);
     }
   }
 
@@ -119,9 +113,7 @@ class AlmentorAnalyticsModule {
         allowMixpanelEvent,
       );
     } catch (ex) {
-      if (kDebugMode) {
-        print(ex);
-      }
+      print(ex);
     }
   }
 
@@ -192,9 +184,7 @@ class AlmentorAnalyticsModule {
         MixPanelSdk.logUser(userData);
       }
     } catch (ex) {
-      if (kDebugMode) {
-        print(ex);
-      }
+      print(ex);
     }
   }
 
