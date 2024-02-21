@@ -8,6 +8,7 @@ import 'package:almentor_analytics_module/event_module.dart';
 import 'package:almentor_analytics_module/event_name_mapper.dart';
 import 'package:almentor_analytics_module/events_name.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class AlmentorAnalyticsModule {
@@ -25,10 +26,24 @@ class AlmentorAnalyticsModule {
   Future<void> init(bool prod) async {
     try {
       await AppsFlyerSDK.initAppsFlyer(prod);
+    } catch (ex) {
+      if (kDebugMode) {
+        print(ex);
+      }
+    }
+    try {
       await MixPanelSdk.initMixpanelSdk(prod);
+    } catch (ex) {
+      if (kDebugMode) {
+        print(ex);
+      }
+    }
+    try {
       BrazeSdk.initBraze();
     } catch (ex) {
-      print(ex);
+      if (kDebugMode) {
+        print(ex);
+      }
     }
   }
 
@@ -53,7 +68,9 @@ class AlmentorAnalyticsModule {
           eventValue: isEventValueValidMap(eventValue) ? eventValue : null,
         );
       } catch (ex) {
-        print(ex);
+        if (kDebugMode) {
+          print(ex);
+        }
       }
     }
     if (allowAppsFlyerEvent && AppsFlyerSDK.appsflyerSdk != null) {
@@ -63,7 +80,9 @@ class AlmentorAnalyticsModule {
           isEventValueValidMap(eventValue) ? eventValue : null,
         );
       } catch (ex) {
-        print(ex);
+        if (kDebugMode) {
+          print(ex);
+        }
       }
     }
     if (allowMixpanelEvent && MixPanelSdk.mixPanelSdk != null) {
@@ -73,7 +92,9 @@ class AlmentorAnalyticsModule {
           isEventValueValidMap(eventValue) ? eventValue : null,
         );
       } catch (ex) {
-        print(ex);
+        if (kDebugMode) {
+          print(ex);
+        }
       }
     }
     if (allowBrazeEvent && BrazeSdk.braze != null) {
@@ -83,7 +104,9 @@ class AlmentorAnalyticsModule {
           isEventValueValidMap(eventValue) ? eventValue : null,
         );
       } catch (ex) {
-        print(ex);
+        if (kDebugMode) {
+          print(ex);
+        }
       }
     }
 
@@ -96,7 +119,9 @@ class AlmentorAnalyticsModule {
         allowMixpanelEvent,
       );
     } catch (ex) {
-      print(ex);
+      if (kDebugMode) {
+        print(ex);
+      }
     }
   }
 
@@ -136,22 +161,40 @@ class AlmentorAnalyticsModule {
     bool allowBrazeEvent = true,
   }) async {
     try {
-    if (allowFirebaseEvents) {
-      await _logUserFirebase(userData);
+      if (allowFirebaseEvents) {
+        await _logUserFirebase(userData);
+      }
+    } catch (e) {
+      if (kDebugMode) {
+        print(e);
+      }
     }
-    if (allowAppsFlyerEvent) {
-      AppsFlyerSDK.logUser(userData);
+    try {
+      if (allowAppsFlyerEvent) {
+        AppsFlyerSDK.logUser(userData);
+      }
+    } catch (e) {
+      if (kDebugMode) {
+        print(e);
+      }
     }
-    if (allowBrazeEvent) {
-      BrazeSdk.logUser(userData);
+    try {
+      if (allowBrazeEvent) {
+        BrazeSdk.logUser(userData);
+      }
+    } catch (e) {
+      if (kDebugMode) {
+        print(e);
+      }
     }
-
-    if (allowMixpanelEvent) {
-      MixPanelSdk.logUser(userData);
-    }
-
+    try {
+      if (allowMixpanelEvent) {
+        MixPanelSdk.logUser(userData);
+      }
     } catch (ex) {
-      print(ex);
+      if (kDebugMode) {
+        print(ex);
+      }
     }
   }
 
