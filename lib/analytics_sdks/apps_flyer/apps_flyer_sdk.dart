@@ -19,11 +19,11 @@ class AppsFlyerSDK {
   static final AppsFlyerOptions appsFlyerOptionsProd = AppsFlyerOptions(
     afDevKey: AppsFlyerConstant.appsFlyerDevKey,
     appId: AppsFlyerConstant.getAppID(),
-    showDebug: true,
+    showDebug: false,
     timeToWaitForATTUserAuthorization: 5.0,
     // appInviteOneLink: "your_appInviteOneLink_here",
     disableAdvertisingIdentifier: false,
-    disableCollectASA: true,
+    disableCollectASA: false,
     manualStart: false,
   );
 
@@ -31,7 +31,7 @@ class AppsFlyerSDK {
   static final AppsFlyerOptions appsFlyerOptionsStage = AppsFlyerOptions(
     afDevKey: AppsFlyerConstant.appsFlyerDevKey,
     appId: AppsFlyerConstant.getAppStageID(),
-    showDebug: true,
+    showDebug: false,
     timeToWaitForATTUserAuthorization: 5.0,
     // appInviteOneLink: "your_appInviteOneLink_here",
     disableAdvertisingIdentifier: false,
