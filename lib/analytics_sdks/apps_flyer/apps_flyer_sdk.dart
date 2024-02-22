@@ -1,10 +1,12 @@
 import 'package:almentor_analytics_module/analytics_sdks/apps_flyer/apps_flyer_constant.dart'
-    as constant;
+as constant;
 import 'package:almentor_analytics_module/analytics_sdks/user_data.dart';
 import 'package:almentor_analytics_module/event_name_mapper.dart';
 import 'package:almentor_analytics_module/events_name.dart';
 import 'package:appsflyer_sdk/appsflyer_sdk.dart';
 import 'package:flutter/foundation.dart';
+
+import 'apps_flyer_constant.dart';
 
 class AppsFlyerSDK {
   const AppsFlyerSDK._();
@@ -13,22 +15,32 @@ class AppsFlyerSDK {
 
   static AppsflyerSdk? get appsflyerSdk => _appsflyerSdk;
 
-  static final appsFlyerOptionsProd = {
-    "afDevKey": constant.AppsFlyerConstant.appsFlyerDevKey,
-    "afAppId": constant.AppsFlyerConstant.getAppID(),
-    "isDebug": kDebugMode,
-    "timeToWaitForATTUserAuthorization": 5.0
-  };
 
-  static final appsFlyerOptionsStage = {
-    "afDevKey": constant.AppsFlyerConstant.appsFlyerDevKey,
-    "afAppId": constant.AppsFlyerConstant.getAppStageID(),
-    "isDebug": kDebugMode,
-    "timeToWaitForATTUserAuthorization": 5.0
-  };
+  static final AppsFlyerOptions appsFlyerOptionsProd = AppsFlyerOptions(
+    afDevKey: AppsFlyerConstant.appsFlyerDevKey,
+    appId: AppsFlyerConstant.getAppID(),
+    showDebug: true,
+    timeToWaitForATTUserAuthorization: 5.0,
+    // appInviteOneLink: "your_appInviteOneLink_here",
+    disableAdvertisingIdentifier: false,
+    disableCollectASA: true,
+    manualStart: false,
+  );
 
 
-static void logUser(UserData userData) {
+  static final AppsFlyerOptions appsFlyerOptionsStage = AppsFlyerOptions(
+    afDevKey: AppsFlyerConstant.appsFlyerDevKey,
+    appId: AppsFlyerConstant.getAppStageID(),
+    showDebug: true,
+    timeToWaitForATTUserAuthorization: 5.0,
+    // appInviteOneLink: "your_appInviteOneLink_here",
+    disableAdvertisingIdentifier: false,
+    disableCollectASA: true,
+    manualStart: false,
+  );
+
+
+  static void logUser(UserData userData) {
     _appsflyerSdk!.setCustomerUserId(userData.userId);
     if (userData.email != null) {
       _appsflyerSdk!.setUserEmails([userData.email!]);
@@ -37,24 +49,21 @@ static void logUser(UserData userData) {
   }
 
   static Future<void> initAppsFlyer(bool prod) async {
-    if(prod){
+    if (prod) {
       _appsflyerSdk = AppsflyerSdk(appsFlyerOptionsProd);
-
-    }else{
+    } else {
       _appsflyerSdk = AppsflyerSdk(appsFlyerOptionsStage);
-
     }
-    await _appsflyerSdk?.initSdk(
+    _appsflyerSdk?.initSdk(
       registerConversionDataCallback: true,
       registerOnAppOpenAttributionCallback: true,
       registerOnDeepLinkingCallback: true,
+
     );
   }
 
-  static Future<void> logAppsFlyerEvent(
-    EventName eventName,
-    dynamic eventValue,
-  ) async {
+  static Future<void> logAppsFlyerEvent(EventName eventName,
+      dynamic eventValue,) async {
     await _appsflyerSdk!.logEvent(
       eventName.convertToTitleCase,
       eventValue,
