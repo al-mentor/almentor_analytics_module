@@ -1,5 +1,7 @@
 library almentor_analytics_module;
 
+import 'dart:io';
+
 import 'package:almentor_analytics_module/analytics_sdks/apps_flyer/apps_flyer_sdk.dart';
 import 'package:almentor_analytics_module/analytics_sdks/braze/braze_sdk.dart';
 import 'package:almentor_analytics_module/analytics_sdks/mixpanel/mixpanel_sdk.dart';
@@ -7,6 +9,7 @@ import 'package:almentor_analytics_module/analytics_sdks/user_data.dart';
 import 'package:almentor_analytics_module/event_module.dart';
 import 'package:almentor_analytics_module/event_name_mapper.dart';
 import 'package:almentor_analytics_module/events_name.dart';
+import 'package:app_tracking_transparency/app_tracking_transparency.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -22,13 +25,35 @@ class AlmentorAnalyticsModule {
   }
 
   final List<EventModule> submittedEvents = [];
-  static Function(Object error, StackTrace stackTrace)? onError = (error, stackTrace) {
+  static Function(Object error, StackTrace stackTrace)? onError =
+      (error, stackTrace) {
     if (kDebugMode) {
       print(error.toString());
     }
   };
-  Future<void> init(bool prod, Function(Object error, StackTrace stackTrace)? onError) async {
+
+  Future<void> requestTrackingAuthorization(bool prod) async {
+    if (await AppTrackingTransparency.trackingAuthorizationStatus ==
+        TrackingStatus.notDetermined) {
+      final status = await AppTrackingTransparency
+          .requestTrackingAuthorization();
+      await Future.delayed(const Duration(milliseconds: 200));
+      if (status == TrackingStatus.authorized) {
+        intSDK(prod);
+      }
+    }
+  }
+
+  Future<void> init(bool prod,
+      Function(Object error, StackTrace stackTrace)? onError) async {
     AlmentorAnalyticsModule.onError = onError;
+    if (Platform.isIOS) {
+      requestTrackingAuthorization(prod);
+    }
+    intSDK(prod);
+  }
+
+  Future<void> intSDK(prod) async {
     try {
       await AppsFlyerSDK.initAppsFlyer(prod);
     } catch (error, stackTrace) {
@@ -142,8 +167,7 @@ class AlmentorAnalyticsModule {
     }
   }
 
-  Future<void> logUser(
-    UserData userData, {
+  Future<void> logUser(UserData userData, {
     bool allowFirebaseEvents = true,
     bool allowAppsFlyerEvent = true,
     bool allowMixpanelEvent = true,
@@ -189,18 +213,16 @@ class AlmentorAnalyticsModule {
     );
   }
 
-  void updateEventsList(
-    EventName eventName,
-    dynamic eventValue,
-    bool isFirebaseAllowed,
-    bool isAppsFlyerAllowed,
-    bool isMixPanelAllowed,
-  ) {
+  void updateEventsList(EventName eventName,
+      dynamic eventValue,
+      bool isFirebaseAllowed,
+      bool isAppsFlyerAllowed,
+      bool isMixPanelAllowed,) {
     final isExists =
-        submittedEvents.any((event) => event.eventName == eventName);
+    submittedEvents.any((event) => event.eventName == eventName);
     if (isExists) {
       submittedEvents[submittedEvents
-              .indexWhere((event) => event.eventName == eventName)]
+          .indexWhere((event) => event.eventName == eventName)]
           .count++;
     } else {
       submittedEvents.add(
