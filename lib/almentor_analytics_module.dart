@@ -48,12 +48,12 @@ class AlmentorAnalyticsModule {
       Function(Object error, StackTrace stackTrace)? onError) async {
     AlmentorAnalyticsModule.onError = onError;
     if (Platform.isIOS) {
-      requestTrackingAuthorization(prod);
+      await  requestTrackingAuthorization(prod);
     }
     intSDK(prod);
   }
 
-  Future<void> intSDK(prod) async {
+  Future<void> intSDK(bool prod) async {
     try {
       await AppsFlyerSDK.initAppsFlyer(prod);
     } catch (error, stackTrace) {
