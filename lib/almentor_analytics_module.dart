@@ -33,22 +33,18 @@ class AlmentorAnalyticsModule {
   };
 
   Future<void> requestTrackingAuthorization(bool prod) async {
-    if (await AppTrackingTransparency.trackingAuthorizationStatus ==
-        TrackingStatus.notDetermined) {
-      final status = await AppTrackingTransparency
-          .requestTrackingAuthorization();
-      await Future.delayed(const Duration(milliseconds: 200));
-      if (status == TrackingStatus.authorized) {
-        intSDK(prod);
-      }
+    final status = await AppTrackingTransparency.trackingAuthorizationStatus;
+    if (status != TrackingStatus.authorized) {
+      final status =
+          await AppTrackingTransparency.requestTrackingAuthorization();
     }
   }
 
-  Future<void> init(bool prod,
-      Function(Object error, StackTrace stackTrace)? onError) async {
+  Future<void> init(
+      bool prod, Function(Object error, StackTrace stackTrace)? onError) async {
     AlmentorAnalyticsModule.onError = onError;
     if (Platform.isIOS) {
-      await  requestTrackingAuthorization(prod);
+      await requestTrackingAuthorization(prod);
     }
     intSDK(prod);
   }
@@ -167,7 +163,8 @@ class AlmentorAnalyticsModule {
     }
   }
 
-  Future<void> logUser(UserData userData, {
+  Future<void> logUser(
+    UserData userData, {
     bool allowFirebaseEvents = true,
     bool allowAppsFlyerEvent = true,
     bool allowMixpanelEvent = true,
@@ -213,16 +210,18 @@ class AlmentorAnalyticsModule {
     );
   }
 
-  void updateEventsList(EventName eventName,
-      dynamic eventValue,
-      bool isFirebaseAllowed,
-      bool isAppsFlyerAllowed,
-      bool isMixPanelAllowed,) {
+  void updateEventsList(
+    EventName eventName,
+    dynamic eventValue,
+    bool isFirebaseAllowed,
+    bool isAppsFlyerAllowed,
+    bool isMixPanelAllowed,
+  ) {
     final isExists =
-    submittedEvents.any((event) => event.eventName == eventName);
+        submittedEvents.any((event) => event.eventName == eventName);
     if (isExists) {
       submittedEvents[submittedEvents
-          .indexWhere((event) => event.eventName == eventName)]
+              .indexWhere((event) => event.eventName == eventName)]
           .count++;
     } else {
       submittedEvents.add(
