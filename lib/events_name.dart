@@ -72,4 +72,28 @@ enum EventName {
   paymentStatusSuccessEvent,
   paymentStatusFailEvent,
   paymentStatusPendingEvent,
+
+  /// Clips
+  clipsTabOpenedEvent,
+  clipServedEvent,
+  clipWatchedEvent,
+  clipCompletedEvent,
+  clipLikedEvent,
+  clipLCTAClickedEvent,
+  clipSharedEvent,
+  signupBlockerOpenedEvent,
+  signupBlockerClosedEvent,
+  signupBlockerCTAClickedEvent,
+
+  /// Downloads
+  courseDownloadedInitiatedEvent,
+  courseDownloadedCompletedEvent,
+  lessonDownloadedInitiatedEvent,
+  lessonDownloadedCompletedEvent,
+  courseDownloadedStoppedEvent,
+  downloadedCourseDeletedEvent,
+  downloadedCoursePlayedEvent,
+  downloadSettingsChangedEvent,
+  downloadsExpiredEvent,
+  expiredDownloadActivatedEvent,
 }
