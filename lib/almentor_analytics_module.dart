@@ -44,6 +44,8 @@ class AlmentorAnalyticsModule {
       bool prod, Function(Object error, StackTrace stackTrace)? onError) async {
     AlmentorAnalyticsModule.onError = onError;
     if (Platform.isIOS) {
+      // wait 10 second
+      await Future.delayed(const Duration(seconds: 10));
       await requestTrackingAuthorization(prod);
     }
     intSDK(prod);
