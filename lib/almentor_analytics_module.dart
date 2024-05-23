@@ -145,6 +145,13 @@ class AlmentorAnalyticsModule {
         value: userData.gender,
       );
     }
+
+    if (userData.email != null) {
+      await FirebaseAnalytics.instance.setUserProperty(
+        name: 'email',
+        value: userData.email,
+      );
+    }
     if (userData.language != null) {
       await FirebaseAnalytics.instance.setUserProperty(
         name: 'language',
