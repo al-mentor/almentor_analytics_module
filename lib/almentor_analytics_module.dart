@@ -25,29 +25,23 @@ class AlmentorAnalyticsModule {
   }
 
   final List<EventModule> submittedEvents = [];
-  static Function(Object error, StackTrace stackTrace)? onError =
-      (error, stackTrace) {
+  static Function(Object error, StackTrace stackTrace)? onError = (error, stackTrace) {
     if (kDebugMode) {
       print(error.toString());
     }
   };
 
   Future<void> requestTrackingAuthorization(bool prod) async {
+    await Future.delayed(const Duration(seconds: 2));
     final status = await AppTrackingTransparency.trackingAuthorizationStatus;
     if (status != TrackingStatus.authorized) {
-      final status =
-          await AppTrackingTransparency.requestTrackingAuthorization();
+      final status = await AppTrackingTransparency.requestTrackingAuthorization();
     }
   }
 
-  Future<void> init(
-      bool prod, Function(Object error, StackTrace stackTrace)? onError) async {
+  Future<void> init(bool prod, Function(Object error, StackTrace stackTrace)? onError) async {
     AlmentorAnalyticsModule.onError = onError;
-    if (Platform.isIOS) {
-      // wait 10 second
-      await Future.delayed(const Duration(seconds: 10));
-      await requestTrackingAuthorization(prod);
-    }
+
     intSDK(prod);
   }
 
@@ -219,12 +213,9 @@ class AlmentorAnalyticsModule {
     bool isAppsFlyerAllowed,
     bool isMixPanelAllowed,
   ) {
-    final isExists =
-        submittedEvents.any((event) => event.eventName == eventName);
+    final isExists = submittedEvents.any((event) => event.eventName == eventName);
     if (isExists) {
-      submittedEvents[submittedEvents
-              .indexWhere((event) => event.eventName == eventName)]
-          .count++;
+      submittedEvents[submittedEvents.indexWhere((event) => event.eventName == eventName)].count++;
     } else {
       submittedEvents.add(
         EventModule(
