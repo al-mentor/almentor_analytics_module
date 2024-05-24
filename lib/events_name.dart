@@ -1,4 +1,6 @@
 enum EventName {
+  userDataEvent,
+
   loginPageLoadedEvent,
   loginPageExitEvent,
   loginWithSocialClickedEvent,

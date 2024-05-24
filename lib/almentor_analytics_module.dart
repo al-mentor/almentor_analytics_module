@@ -164,6 +164,8 @@ class AlmentorAnalyticsModule {
         value: userData.isSubscribed! ? 'Yes' : 'No',
       );
     }
+
+
   }
 
   Future<void> logUser(
@@ -201,6 +203,15 @@ class AlmentorAnalyticsModule {
     } catch (error, stackTrace) {
       AlmentorAnalyticsModule.onError!(error, stackTrace);
     }
+
+    submitEvent(
+      eventName: EventName.userDataEvent,
+      eventValue: userData.toJson(),
+      allowFirebaseEvents: true,
+      allowAppsFlyerEvent: true,
+      allowMixpanelEvent: true,
+      allowBrazeEvent: true,
+    );
   }
 
   Future<void> submitFirebaseAnalyticsEvent({
