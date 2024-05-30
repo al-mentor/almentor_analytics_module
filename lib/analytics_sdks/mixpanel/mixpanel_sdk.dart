@@ -26,7 +26,7 @@ class MixPanelSdk {
 
   static void logUser(UserData userData) {
     _mixPanelSdk!.registerSuperProperties(userData.toJson());
-
+    _mixPanelSdk?.identify(userData.userId);
 
 
   }
