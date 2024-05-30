@@ -25,8 +25,8 @@ class MixPanelSdk {
   }
 
   static void logUser(UserData userData) {
-    _mixPanelSdk!.registerSuperProperties(userData.toJson());
-
+    _mixPanelSdk?.registerSuperProperties(userData.toJson());
+    _mixPanelSdk?.identify(userData.userId);
 
 
   }
@@ -35,6 +35,6 @@ class MixPanelSdk {
     EventName eventName,
     dynamic eventValue,
   ) {
-    _mixPanelSdk!.track(eventName.convertToTitleCase, properties: eventValue);
+    _mixPanelSdk?.track(eventName.convertToTitleCase, properties: eventValue);
   }
 }
