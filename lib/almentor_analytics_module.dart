@@ -1,7 +1,5 @@
 library almentor_analytics_module;
 
-import 'dart:io';
-
 import 'package:almentor_analytics_module/analytics_sdks/apps_flyer/apps_flyer_sdk.dart';
 import 'package:almentor_analytics_module/analytics_sdks/braze/braze_sdk.dart';
 import 'package:almentor_analytics_module/analytics_sdks/mixpanel/mixpanel_sdk.dart';
@@ -164,8 +162,6 @@ class AlmentorAnalyticsModule {
         value: userData.isSubscribed! ? 'Yes' : 'No',
       );
     }
-
-
   }
 
   Future<void> logUser(
