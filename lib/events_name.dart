@@ -16,6 +16,8 @@ enum EventName {
   loginButtonClickedEvent,
   loginSuccessEvent,
   loginFailedEvent,
+  userSignupFailedEvent,
+  userAccountActivatedEvent,
   forgetPasswordClickedEvent,
   searchPerformedEvent,
   searchResultClickedEvent,
@@ -74,6 +76,7 @@ enum EventName {
   paymentStatusSuccessEvent,
   paymentStatusFailEvent,
   paymentStatusPendingEvent,
+  plansPageViewedEvent,
 
   /// Clips
   clipsTabOpenedEvent,
