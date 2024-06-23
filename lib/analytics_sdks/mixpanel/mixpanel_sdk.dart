@@ -35,6 +35,6 @@ class MixPanelSdk {
     EventName eventName,
     dynamic eventValue,
   ) {
-    _mixPanelSdk?.track(eventName.convertToTitleCase, properties: eventValue);
+    _mixPanelSdk?.track(eventName.convertToSnakeCase, properties: eventValue);
   }
 }

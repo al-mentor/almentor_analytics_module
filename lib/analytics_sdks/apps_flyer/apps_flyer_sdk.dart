@@ -65,7 +65,7 @@ class AppsFlyerSDK {
   static Future<void> logAppsFlyerEvent(EventName eventName,
       dynamic eventValue,) async {
     await _appsflyerSdk!.logEvent(
-      eventName.convertToTitleCase,
+      eventName.convertToSnakeCase,
       eventValue,
     );
   }
