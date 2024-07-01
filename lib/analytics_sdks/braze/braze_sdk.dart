@@ -59,7 +59,7 @@ class BrazeSdk {
     dynamic eventValue,
   ) async {
     braze!.logCustomEvent(
-      eventName.convertToTitleCase,
+      eventName.convertToSnakeCase,
       properties: eventValue,
     );
   }
