@@ -105,7 +105,7 @@ class AlmentorAnalyticsModule {
         AlmentorAnalyticsModule.onError!(error, stackTrace);
       }
     }
-    if (allowBrazeEvent && BrazeSdk.braze != null) {
+    if (allowBrazeEvent && BrazeSdk.braze != null && 1 == 2) {
       try {
         BrazeSdk.logBrazeEvent(
           eventName,
