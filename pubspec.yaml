@@ -14,7 +14,7 @@ dependencies:
   firebase_core: ^2.20.0
   appsflyer_sdk: ^6.13.0+1
   mixpanel_flutter: ^2.2.0
-  braze_plugin: ^8.1.0
+  braze_plugin: ^10.1.0
   app_tracking_transparency: ^2.0.4
 
 dev_dependencies:
