@@ -102,4 +102,19 @@ enum EventName {
   downloadSettingsChangedEvent,
   downloadsExpiredEvent,
   expiredDownloadActivatedEvent,
+
+
+
+
+
+  searchInitiatedEvent,
+  courseDownloadInitiatedEvent,
+  courseDownloadCompletedEvent,
+  lessonDownloadInitiatedEvent,
+  lessonDownloadCompletedEvent,
+  courseDownloadStoppedEvent,
+
+
+
+
 }
