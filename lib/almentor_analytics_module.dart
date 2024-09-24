@@ -79,7 +79,7 @@ class AlmentorAnalyticsModule {
       try {
         submitFirebaseAnalyticsEvent(
           eventName: eventName,
-          eventValue: isEventValueValidMap(eventValue) ? eventValue : null,
+          eventValue: isEventValueValidMap(eventValue) ? Map<String, Object>.from(eventValue) : null,
         );
       } catch (error, stackTrace) {
         AlmentorAnalyticsModule.onError!(error, stackTrace);
