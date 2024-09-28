@@ -92,11 +92,11 @@ enum EventName {
   signupBlockerCTAClickedEvent,
 
   /// Downloads
-  courseDownloadedInitiatedEvent,
-  courseDownloadedCompletedEvent,
-  lessonDownloadedInitiatedEvent,
-  lessonDownloadedCompletedEvent,
-  courseDownloadedStoppedEvent,
+  courseDownloadInitiatedEvent,
+  courseDownloadCompletedEvent,
+  lessonDownloadInitiatedEvent,
+  lessonDownloadCompletedEvent,
+  courseDownloadStoppedEvent,
   downloadedCourseDeletedEvent,
   downloadedCoursePlayedEvent,
   downloadSettingsChangedEvent,
@@ -109,10 +109,7 @@ enum EventName {
 
   searchInitiatedEvent,
   courseDownloadInitiatedEvent,
-  courseDownloadCompletedEvent,
-  lessonDownloadInitiatedEvent,
-  lessonDownloadCompletedEvent,
-  courseDownloadStoppedEvent,
+
 
 
 
