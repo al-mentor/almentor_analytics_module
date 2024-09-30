@@ -108,7 +108,7 @@ enum EventName {
 
 
   searchInitiatedEvent,
-  courseDownloadInitiatedEvent,
+
 
 
 
