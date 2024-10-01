@@ -1,3 +1,5 @@
+import 'dart:io';
+
 class UserData {
   final String userId;
   final String? userName;
@@ -9,6 +11,7 @@ class UserData {
   final bool? isSubscribed;
   final String? language;
   final String? userType;
+  final String? subscriptionType;
 
   UserData({
     required this.userId,
@@ -21,9 +24,11 @@ class UserData {
     this.isSubscribed,
     this.language,
     this.userType,
+    this.subscriptionType,
   });
 
-  Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() =>
+      {
         'user_id': userId,
         if (userName != null) 'user_name': userName,
         if (phoneNumber != null) 'phone_number': phoneNumber,
@@ -34,5 +39,7 @@ class UserData {
         if (language != null) 'language': language,
         if (userType != null) 'user_type': userType,
         if (signUpDate != null) 'sign_up_date': signUpDate,
+        if (subscriptionType != null) 'subscription_type': subscriptionType,
+        "platform": Platform.isAndroid ? "Android" : "Ios"
       };
 }
