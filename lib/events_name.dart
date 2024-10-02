@@ -72,7 +72,7 @@ enum EventName {
   paymentMethodSelectedEvent,
   subscriptionPlanSelectedEvent,
   couponCodeSubmittedEvent,
-  checkoutEvent,
+  subscriptionCheckout,
   paymentCompletedEvent,
   paymentStatusSuccessEvent,
   paymentStatusFailEvent,

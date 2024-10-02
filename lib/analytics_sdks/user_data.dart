@@ -4,6 +4,7 @@ class UserData {
   final String userId;
   final String? userName;
   final String? phoneNumber;
+  final String? organizationName;
   final String? email;
   final String? gender;
   final String? firstSubscriptionDate;
@@ -22,6 +23,7 @@ class UserData {
     this.firstSubscriptionDate,
     this.signUpDate,
     this.isSubscribed,
+    this.organizationName,
     this.language,
     this.userType,
     this.subscriptionType,
@@ -34,6 +36,7 @@ class UserData {
         if (phoneNumber != null) 'phone_number': phoneNumber,
         if (email != null) 'email': email,
         if (gender != null) 'gender': gender,
+        if (organizationName != organizationName) 'organization_name': organizationName,
         if (firstSubscriptionDate != null)
           'first_subscription_date': firstSubscriptionDate,
         if (language != null) 'language': language,

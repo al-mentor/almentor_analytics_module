@@ -248,7 +248,7 @@ class AlmentorAnalyticsModule {
     return eventValue != null && eventValue is Map;
   }
 
-  void resetMixPanelSDK(){
+  void reset(){
     MixPanelSdk.rest();
   }
 }
