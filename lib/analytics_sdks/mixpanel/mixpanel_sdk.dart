@@ -24,11 +24,12 @@ class MixPanelSdk {
     }
   }
 
-  static void logUser(UserData userData) {
+  static void logUser(UserData userData) async {
+    final userDistinctId = await _mixPanelSdk?.getDistinctId();
     _mixPanelSdk?.registerSuperProperties(userData.toJson());
-    _mixPanelSdk?.identify(userData.userId);
-
-
+    if (userDistinctId != userData.userId) {
+      _mixPanelSdk?.identify(userData.userId);
+    }
   }
 
   static void logMixpanelEvent(
@@ -36,5 +37,9 @@ class MixPanelSdk {
     dynamic eventValue,
   ) {
     _mixPanelSdk?.track(eventName.convertToSnakeCase, properties: eventValue);
+  }
+
+  static void rest() {
+    _mixPanelSdk?.reset();
   }
 }

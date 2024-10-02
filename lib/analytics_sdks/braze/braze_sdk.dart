@@ -40,6 +40,12 @@ class BrazeSdk {
         userData.isSubscribed! ? 'Yes' : 'No',
       );
     }
+    if (userData.userType != null) {
+      _braze!.setStringCustomUserAttribute(
+        'user_type',
+        userData.userType ?? "",
+      );
+    }
     if (userData.firstSubscriptionDate != null) {
       _braze!.setStringCustomUserAttribute(
         'first_subscription_date',

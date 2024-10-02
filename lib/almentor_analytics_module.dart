@@ -247,4 +247,8 @@ class AlmentorAnalyticsModule {
   bool isEventValueValidMap(dynamic eventValue) {
     return eventValue != null && eventValue is Map;
   }
+
+  void reset(){
+    MixPanelSdk.rest();
+  }
 }
