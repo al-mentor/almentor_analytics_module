@@ -16,7 +16,7 @@ enum EventName {
   loginButtonClickedEvent,
   userLoginCompletedEvent,
   userLoginFailedEvent,
-  userSignupFailedEvent,
+  userSignUpFailedEvent,
   userAccountActivatedEvent,
   forgetPasswordClickedEvent,
   searchPerformedEvent,
