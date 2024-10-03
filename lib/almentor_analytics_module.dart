@@ -248,5 +248,8 @@ class AlmentorAnalyticsModule {
 
   void reset() {
     MixPanelSdk.rest();
+    BrazeSdk.reset();
+    AppsFlyerSDK.rest();
+    FirebaseAnalytics.instance.resetAnalyticsData();
   }
 }
