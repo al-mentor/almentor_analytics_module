@@ -7,7 +7,10 @@ class EventModule {
   bool isFirebaseAllowed;
   bool isAppsFlyerAllowed;
   bool isMixPanelAllowed;
+  bool isBrazeAllowed;
+
+
 
   EventModule(this.eventName, this.eventValue, this.count,
-      this.isFirebaseAllowed, this.isAppsFlyerAllowed, this.isMixPanelAllowed);
+      this.isFirebaseAllowed, this.isAppsFlyerAllowed, this.isMixPanelAllowed, this.isBrazeAllowed);
 }
