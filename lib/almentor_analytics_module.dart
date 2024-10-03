@@ -23,7 +23,8 @@ class AlmentorAnalyticsModule {
   }
 
   final List<EventModule> submittedEvents = [];
-  static Function(Object error, StackTrace stackTrace)? onError = (error, stackTrace) {
+  static Function(Object error, StackTrace stackTrace)? onError =
+      (error, stackTrace) {
     if (kDebugMode) {
       print(error.toString());
     }
@@ -33,11 +34,13 @@ class AlmentorAnalyticsModule {
     await Future.delayed(const Duration(seconds: 2));
     final status = await AppTrackingTransparency.trackingAuthorizationStatus;
     if (status != TrackingStatus.authorized) {
-      final status = await AppTrackingTransparency.requestTrackingAuthorization();
+      final status =
+          await AppTrackingTransparency.requestTrackingAuthorization();
     }
   }
 
-  Future<void> init(bool prod, Function(Object error, StackTrace stackTrace)? onError) async {
+  Future<void> init(
+      bool prod, Function(Object error, StackTrace stackTrace)? onError) async {
     AlmentorAnalyticsModule.onError = onError;
 
     intSDK(prod);
@@ -79,7 +82,9 @@ class AlmentorAnalyticsModule {
       try {
         submitFirebaseAnalyticsEvent(
           eventName: eventName,
-          eventValue: isEventValueValidMap(eventValue) ? Map<String, Object>.from(eventValue) : null,
+          eventValue: isEventValueValidMap(eventValue)
+              ? Map<String, Object>.from(eventValue)
+              : null,
         );
       } catch (error, stackTrace) {
         AlmentorAnalyticsModule.onError!(error, stackTrace);
@@ -117,13 +122,8 @@ class AlmentorAnalyticsModule {
     }
 
     try {
-      updateEventsList(
-        eventName,
-        eventValue,
-        allowFirebaseEvents,
-        allowAppsFlyerEvent,
-        allowMixpanelEvent,
-      );
+      updateEventsList(eventName, eventValue, allowFirebaseEvents,
+          allowAppsFlyerEvent, allowMixpanelEvent, allowBrazeEvent);
     } catch (ex) {
       print(ex);
     }
@@ -203,10 +203,10 @@ class AlmentorAnalyticsModule {
     submitEvent(
       eventName: EventName.userDataEvent,
       eventValue: userData.toJson(),
-      allowFirebaseEvents: true,
-      allowAppsFlyerEvent: true,
-      allowMixpanelEvent: true,
-      allowBrazeEvent: true,
+      allowFirebaseEvents: allowFirebaseEvents,
+      allowAppsFlyerEvent: allowAppsFlyerEvent,
+      allowMixpanelEvent: allowMixpanelEvent,
+      allowBrazeEvent: allowBrazeEvent,
     );
   }
 
@@ -226,20 +226,18 @@ class AlmentorAnalyticsModule {
     bool isFirebaseAllowed,
     bool isAppsFlyerAllowed,
     bool isMixPanelAllowed,
+    bool isBrazeAllowed,
   ) {
-    final isExists = submittedEvents.any((event) => event.eventName == eventName);
+    final isExists =
+        submittedEvents.any((event) => event.eventName == eventName);
     if (isExists) {
-      submittedEvents[submittedEvents.indexWhere((event) => event.eventName == eventName)].count++;
+      submittedEvents[submittedEvents
+              .indexWhere((event) => event.eventName == eventName)]
+          .count++;
     } else {
       submittedEvents.add(
-        EventModule(
-          eventName,
-          eventValue,
-          1,
-          isFirebaseAllowed,
-          isAppsFlyerAllowed,
-          isMixPanelAllowed,
-        ),
+        EventModule(eventName, eventValue, 1, isFirebaseAllowed,
+            isAppsFlyerAllowed, isMixPanelAllowed, isBrazeAllowed),
       );
     }
   }
@@ -248,7 +246,7 @@ class AlmentorAnalyticsModule {
     return eventValue != null && eventValue is Map;
   }
 
-  void reset(){
+  void reset() {
     MixPanelSdk.rest();
   }
 }
