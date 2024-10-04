@@ -63,7 +63,7 @@ class AppsFlyerSDK {
   }
 
   static void rest() {
-    _appsflyerSdk!.setCustomerUserId(null);
+    _appsflyerSdk!.setCustomerUserId("");
     _appsflyerSdk!.setUserEmails([]);
     _appsflyerSdk!.setAdditionalData({});
   }
