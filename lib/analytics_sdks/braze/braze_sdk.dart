@@ -60,6 +60,11 @@ class BrazeSdk {
     }
   }
 
+  static void  reset() {
+
+
+  }
+
   static void logBrazeEvent(
     EventName eventName,
     dynamic eventValue,

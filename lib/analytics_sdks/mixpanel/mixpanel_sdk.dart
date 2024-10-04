@@ -24,7 +24,7 @@ class MixPanelSdk {
     }
   }
 
-  static void logUser(UserData userData) async {
+  static   logUser(UserData userData) async {
     final userDistinctId = await _mixPanelSdk?.getDistinctId();
     _mixPanelSdk?.registerSuperProperties(userData.toJson());
     if (userDistinctId != userData.userId) {

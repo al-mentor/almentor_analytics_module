@@ -62,6 +62,12 @@ class AppsFlyerSDK {
     );
   }
 
+  static void rest() {
+    _appsflyerSdk!.setCustomerUserId("");
+    _appsflyerSdk!.setUserEmails([]);
+    _appsflyerSdk!.setAdditionalData({});
+  }
+
   static Future<void> logAppsFlyerEvent(EventName eventName,
       dynamic eventValue,) async {
     await _appsflyerSdk!.logEvent(

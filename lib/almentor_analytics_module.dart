@@ -194,7 +194,7 @@ class AlmentorAnalyticsModule {
     }
     try {
       if (allowMixpanelEvent) {
-        MixPanelSdk.logUser(userData);
+       await MixPanelSdk.logUser(userData);
       }
     } catch (error, stackTrace) {
       AlmentorAnalyticsModule.onError!(error, stackTrace);
@@ -248,5 +248,8 @@ class AlmentorAnalyticsModule {
 
   void reset() {
     MixPanelSdk.rest();
+    BrazeSdk.reset();
+    AppsFlyerSDK.rest();
+    FirebaseAnalytics.instance.resetAnalyticsData();
   }
 }
