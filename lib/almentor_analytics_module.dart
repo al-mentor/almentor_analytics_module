@@ -78,6 +78,11 @@ class AlmentorAnalyticsModule {
     bool allowMixpanelEvent = false,
     bool allowBrazeEvent = false,
   }) async {
+
+    eventValue?.removeWhere((key, value) => value == null);
+
+
+
     if (allowFirebaseEvents) {
       try {
         submitFirebaseAnalyticsEvent(
