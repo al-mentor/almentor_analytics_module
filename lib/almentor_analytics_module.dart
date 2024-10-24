@@ -16,6 +16,7 @@ class AlmentorAnalyticsModule {
   AlmentorAnalyticsModule._();
 
   static AlmentorAnalyticsModule? _instance;
+  UserData? _currentUserData;
 
   static AlmentorAnalyticsModule get instance {
     _instance ??= AlmentorAnalyticsModule._();
@@ -78,10 +79,7 @@ class AlmentorAnalyticsModule {
     bool allowMixpanelEvent = false,
     bool allowBrazeEvent = false,
   }) async {
-
     eventValue?.removeWhere((key, value) => value == null);
-
-
 
     if (allowFirebaseEvents) {
       try {
@@ -115,7 +113,10 @@ class AlmentorAnalyticsModule {
         AlmentorAnalyticsModule.onError!(error, stackTrace);
       }
     }
-    if (allowBrazeEvent && BrazeSdk.braze != null) {
+    if (allowBrazeEvent &&
+        BrazeSdk.braze != null &&
+        _currentUserData != null &&
+        _currentUserData?.userType == "Consumer") {
       try {
         BrazeSdk.logBrazeEvent(
           eventName,
@@ -176,6 +177,8 @@ class AlmentorAnalyticsModule {
     bool allowMixpanelEvent = true,
     bool allowBrazeEvent = true,
   }) async {
+    _currentUserData = userData;
+
     try {
       if (allowFirebaseEvents) {
         await _logUserFirebase(userData);
@@ -191,7 +194,7 @@ class AlmentorAnalyticsModule {
       AlmentorAnalyticsModule.onError!(error, stackTrace);
     }
     try {
-      if (allowBrazeEvent) {
+      if (allowBrazeEvent && userData.userType == "Consumer") {
         BrazeSdk.logUser(userData);
       }
     } catch (error, stackTrace) {
@@ -199,7 +202,7 @@ class AlmentorAnalyticsModule {
     }
     try {
       if (allowMixpanelEvent) {
-       await MixPanelSdk.logUser(userData);
+        await MixPanelSdk.logUser(userData);
       }
     } catch (error, stackTrace) {
       AlmentorAnalyticsModule.onError!(error, stackTrace);
