@@ -41,7 +41,9 @@ class AppsFlyerSDK {
 
 
   static void logUser(UserData userData) {
-    _appsflyerSdk!.setCustomerUserId(userData.userId);
+    if (userData.userId != null) {
+      _appsflyerSdk!.setCustomerUserId(userData.userId!);
+    }
     if (userData.email != null) {
       _appsflyerSdk!.setUserEmails([userData.email!]);
     }
