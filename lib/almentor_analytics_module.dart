@@ -222,6 +222,10 @@ class AlmentorAnalyticsModule {
     required EventName eventName,
     dynamic eventValue,
   }) async {
+    if (eventValue is List) {
+      eventValue = eventValue.toString();
+    }
+
     await FirebaseAnalytics.instance.logEvent(
       name: eventName.convertToSnakeCase,
       parameters: eventValue,
