@@ -222,8 +222,12 @@ class AlmentorAnalyticsModule {
     required EventName eventName,
     dynamic eventValue,
   }) async {
-    if (eventValue is List) {
-      eventValue = eventValue.toString();
+    if (eventValue is Map) {
+      eventValue.forEach((key, value) {
+        if (value is List) {
+          eventValue[key] = value.toString();
+        }
+      });
     }
 
     await FirebaseAnalytics.instance.logEvent(
