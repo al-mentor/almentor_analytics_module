@@ -18,10 +18,10 @@ class BrazeSdk {
     if(_braze == null){
       initBraze();
     }
-    if (userData.userId.isEmpty) {
+    if (userData.userId ==null || userData.userId!.isEmpty) {
       return;
     }
-    _braze!.changeUser(userData.userId);
+    _braze!.changeUser(userData.userId!);
     if (userData.userName != null) {
       _braze!.setFirstName(userData.userName!);
     }

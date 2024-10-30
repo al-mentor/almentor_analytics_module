@@ -27,8 +27,8 @@ class MixPanelSdk {
   static   logUser(UserData userData) async {
     final userDistinctId = await _mixPanelSdk?.getDistinctId();
     _mixPanelSdk?.registerSuperProperties(userData.toJson());
-    if (userDistinctId != userData.userId) {
-      _mixPanelSdk?.identify(userData.userId);
+    if (userDistinctId != userData.userId && userData.userId != null) {
+      _mixPanelSdk?.identify(userData.userId!);
     }
   }
 
