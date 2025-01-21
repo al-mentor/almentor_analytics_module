@@ -105,15 +105,6 @@ enum EventName {
   downloadsExpiredEvent,
   expiredDownloadActivatedEvent,
 
-
-
-
-
   searchInitiatedEvent,
-
-
-
-
-
-
+  certificateAddedToLinkedin,
 }
