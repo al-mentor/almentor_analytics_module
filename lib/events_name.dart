@@ -106,5 +106,15 @@ enum EventName {
   expiredDownloadActivatedEvent,
 
   searchInitiatedEvent,
+  hasPipFeatureEvent,
+
+  pipEnterdEvent,
+  pipExitedEvent,
+
+
+
+
+
+
   certificateAddedToLinkedin,
 }
