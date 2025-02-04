@@ -111,10 +111,6 @@ enum EventName {
   pipEnterdEvent,
   pipExitedEvent,
 
-
-
-
-
-
   certificateAddedToLinkedin,
+  freeLessonPlayed
 }
