@@ -113,7 +113,10 @@ enum EventName {
 
   certificateAddedToLinkedin,
   freeLessonPlayed,
+  
+  contentPageViewed,
 
+  //authentication events
   getStartedPageEnteredEvent,
   continueWithSocialClickedEvent,
   continueWithEmailClickedEvent,
@@ -123,4 +126,5 @@ enum EventName {
   userSignupCompletedEvent,
   passwordResetInstructionsSentEvent,
   userLoginStartedEvent
+    
 }
