@@ -122,7 +122,7 @@ enum EventName {
   continueWithEmailClickedEvent,
   userSignupStartedEvent,
   signupDetailsSubmittedEvent,
-  userSignUpFailedEventEvent,
+  userSignUpFailedEvent,
   userSignupCompletedEvent,
   passwordResetInstructionsSentEvent,
   userLoginStartedEvent
