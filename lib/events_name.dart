@@ -16,7 +16,7 @@ enum EventName {
   loginButtonClickedEvent,
   userLoginCompletedEvent,
   userLoginFailedEvent,
-  userSignUpFailedEvent,
+  //userSignUpFailedEvent,
   userAccountActivatedEvent,
   forgetPasswordClickedEvent,
   searchPerformedEvent,
@@ -51,7 +51,7 @@ enum EventName {
   courseLessonResumedEvent,
   courseSavedEvent,
   courseEnrollmentStartedEvent,
-  userSignUpStartedEvent,
+  //userSignUpStartedEvent,
   userSignUpCompletedEvent,
   appDataDeviceTypeEvent,
   appDataDeviceModelEvent,
@@ -113,7 +113,18 @@ enum EventName {
 
   certificateAddedToLinkedin,
   freeLessonPlayed,
-
+  
   contentPageViewed,
 
+  //authentication events
+  getStartedPageEnteredEvent,
+  continueWithSocialClickedEvent,
+  continueWithEmailClickedEvent,
+  userSignupStartedEvent,
+  signupDetailsSubmittedEvent,
+  userSignUpFailedEvent,
+  userSignupCompletedEvent,
+  passwordResetInstructionsSentEvent,
+  userLoginStartedEvent
+    
 }
