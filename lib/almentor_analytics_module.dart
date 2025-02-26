@@ -9,6 +9,7 @@ import 'package:almentor_analytics_module/event_name_mapper.dart';
 import 'package:almentor_analytics_module/events_name.dart';
 import 'package:app_tracking_transparency/app_tracking_transparency.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
@@ -136,18 +137,29 @@ class AlmentorAnalyticsModule {
   }
 
   Future<void> _logUserFirebase(UserData userData) async {
+    if(userData.userId == null || userData.userId!.isEmpty){
+      return;
+    }
+
     await FirebaseAnalytics.instance.setUserId(id: userData.userId);
+    FirebaseCrashlytics.instance.setUserIdentifier(userData.userId ?? "");
+
     if (userData.phoneNumber != null) {
       await FirebaseAnalytics.instance.setUserProperty(
         name: 'phone_Number',
         value: userData.phoneNumber,
       );
+      FirebaseCrashlytics.instance
+          .setCustomKey('phone_Number', userData.phoneNumber ?? "");
     }
     if (userData.gender != null) {
       await FirebaseAnalytics.instance.setUserProperty(
         name: 'gender',
         value: userData.gender,
       );
+
+      FirebaseCrashlytics.instance
+          .setCustomKey('gender', userData.gender ?? "");
     }
 
     if (userData.email != null) {
@@ -155,18 +167,26 @@ class AlmentorAnalyticsModule {
         name: 'email',
         value: userData.email,
       );
+
+      FirebaseCrashlytics.instance.setCustomKey('email', userData.email ?? "");
     }
     if (userData.language != null) {
       await FirebaseAnalytics.instance.setUserProperty(
         name: 'language',
         value: userData.language,
       );
+
+      FirebaseCrashlytics.instance
+          .setCustomKey('language', userData.language ?? "");
     }
     if (userData.isSubscribed != null) {
       await FirebaseAnalytics.instance.setUserProperty(
         name: 'is_subscribed',
         value: userData.isSubscribed! ? 'Yes' : 'No',
       );
+
+      FirebaseCrashlytics.instance
+          .setCustomKey('is_subscribed', userData.isSubscribed! ? 'Yes' : 'No');
     }
   }
 
