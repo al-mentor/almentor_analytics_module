@@ -137,6 +137,10 @@ class AlmentorAnalyticsModule {
   }
 
   Future<void> _logUserFirebase(UserData userData) async {
+    if(userData.userId == null || userData.userId!.isEmpty){
+      return;
+    }
+
     await FirebaseAnalytics.instance.setUserId(id: userData.userId);
     FirebaseCrashlytics.instance.setUserIdentifier(userData.userId ?? "");
 
