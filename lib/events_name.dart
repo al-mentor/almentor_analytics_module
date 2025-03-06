@@ -84,6 +84,7 @@ enum EventName {
   /// Clips
   clipsTabOpenedEvent,
   clipServedEvent,
+  clipErrorEvent,
   clipWatchedEvent,
   clipCompletedEvent,
   clipLikedEvent,
