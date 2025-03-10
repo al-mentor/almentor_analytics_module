@@ -126,6 +126,6 @@ enum EventName {
   userSignUpFailedEvent,
   userSignupCompletedEvent,
   passwordResetInstructionsSentEvent,
-  userLoginStartedEvent
-    
+  userLoginStartedEvent,
+  continueWithPhoneClickedEvent
 }
