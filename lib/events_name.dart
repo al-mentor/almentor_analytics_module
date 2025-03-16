@@ -105,6 +105,7 @@ enum EventName {
   downloadSettingsChangedEvent,
   downloadsExpiredEvent,
   expiredDownloadActivatedEvent,
+  downloadsErrorEvent,
 
   searchInitiatedEvent,
   hasPipFeatureEvent,
