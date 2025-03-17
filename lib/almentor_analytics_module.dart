@@ -189,7 +189,9 @@ class AlmentorAnalyticsModule {
           .setCustomKey('is_subscribed', userData.isSubscribed! ? 'Yes' : 'No');
     }
   }
-
+  void incrementByMixpanel({required String prop,required double value}){
+    MixPanelSdk.incrementByMixpanel(prop: prop, value: value);
+  }
   Future<void> logUser(
     UserData userData, {
     bool allowFirebaseEvents = true,
