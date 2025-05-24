@@ -128,7 +128,6 @@ enum EventName {
   userSignupCompletedEvent,
   passwordResetInstructionsSentEvent,
   userLoginStartedEvent,
-  continueWithPhoneClickedEvent,
 
   // AI Chat Events
   almentorAiChatEnteredEvent,
