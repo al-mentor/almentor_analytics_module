@@ -32,6 +32,11 @@ class MixPanelSdk {
     }
   }
 
+  static void incrementByMixpanel({required String prop,required double value}){
+    // increment "age" by 2
+    _mixPanelSdk?.getPeople().increment(prop,value);
+  }
+
   static void logMixpanelEvent(
     EventName eventName,
     dynamic eventValue,
