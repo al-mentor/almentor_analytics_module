@@ -115,7 +115,7 @@ enum EventName {
 
   certificateAddedToLinkedin,
   freeLessonPlayed,
-  
+
   contentPageViewed,
 
   //authentication events
@@ -128,5 +128,11 @@ enum EventName {
   userSignupCompletedEvent,
   passwordResetInstructionsSentEvent,
   userLoginStartedEvent,
+
+  // AI Chat Events
+  almentorAiChatEnteredEvent,
+  almentorAiChatQuerySentEvent,
+  almentorAiChatRecommendationProvidedEvent,
+  almentorAiChatNewChatStartedEvent,
   continueWithPhoneClickedEvent
 }
