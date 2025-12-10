@@ -10,13 +10,13 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  firebase_analytics: ^12.0.2
-  firebase_core: ^4.1.1
-  appsflyer_sdk: ^6.14.3
-  mixpanel_flutter: ^2.2.0
-  braze_plugin: ^10.1.0
-  app_tracking_transparency: ^2.0.6
-  firebase_crashlytics: ^5.0.2
+  firebase_analytics: ^12.0.4 #36 days ago - 10-12-2025
+  firebase_core: ^4.2.1 #36 days ago - 10-12-2025
+  appsflyer_sdk: ^6.17.7+1 #38 days ago - 10-12-2025
+  mixpanel_flutter: ^2.4.4 #6 months ago - 10-12-2025
+  braze_plugin: ^16.0.0 #47 days ago - 10-12-2025
+  app_tracking_transparency: ^2.0.6+1  #latest - 10-12-2025
+  firebase_crashlytics: ^5.0.5 #22 days ago - 10-12-2025
 
 
 dev_dependencies:
