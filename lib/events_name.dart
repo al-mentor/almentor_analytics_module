@@ -134,5 +134,7 @@ enum EventName {
   almentorAiChatQuerySentEvent,
   almentorAiChatRecommendationProvidedEvent,
   almentorAiChatNewChatStartedEvent,
-  continueWithPhoneClickedEvent
+  continueWithPhoneClickedEvent,
+
+  discoverMoreClickedEvent
 }
