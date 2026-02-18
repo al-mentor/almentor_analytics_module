@@ -1,6 +1,5 @@
 enum EventName {
   userDataEvent,
-
   loginPageLoadedEvent,
   loginPageExitEvent,
   loginWithSocialClickedEvent,
@@ -106,16 +105,12 @@ enum EventName {
   downloadsExpiredEvent,
   expiredDownloadActivatedEvent,
   downloadsErrorEvent,
-
   searchInitiatedEvent,
   hasPipFeatureEvent,
-
   pipEnterdEvent,
   pipExitedEvent,
-
   certificateAddedToLinkedin,
   freeLessonPlayed,
-
   contentPageViewed,
 
   //authentication events
@@ -135,7 +130,15 @@ enum EventName {
   almentorAiChatRecommendationProvidedEvent,
   almentorAiChatNewChatStartedEvent,
   continueWithPhoneClickedEvent,
-
   discoverMoreClickedEvent,
   appOpenedEvent,
+
+  // New Course
+  promoOpened,
+  videoPlayed,
+  videoPaused,
+  videoEnded,
+  videoProgress,
+  videoError,
+  videoEnterFullScreen,
 }
