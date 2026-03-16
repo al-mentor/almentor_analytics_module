@@ -79,6 +79,7 @@ enum EventName {
   plansPageViewedEvent,
   subscriptionCheckoutStartedEvent,
   subscriptionPlanChangedEvent,
+  paymentCancelledEvent,
 
   /// Clips
   clipsTabOpenedEvent,
