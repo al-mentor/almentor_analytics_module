@@ -90,6 +90,7 @@ enum EventName {
   clipLikedEvent,
   clipCtaClickedEvent,
   clipSharedEvent,
+  microLearnButtonClicked,
   signupBlockerOpenedEvent,
   signupBlockerClosedEvent,
   signupBlockerCTAClickedEvent,
