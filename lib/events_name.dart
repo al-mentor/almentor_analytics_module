@@ -137,7 +137,7 @@ enum EventName {
   discoverMoreClickedEvent,
   appOpenedEvent,
 
-  // New Course
+  // New Course promo page
   promoOpened,
   videoPlayed,
   videoPaused,
@@ -145,4 +145,20 @@ enum EventName {
   videoProgress,
   videoError,
   videoEnterFullScreen,
+  subscribeUnauthenticatedEvent,
+  subscribeNowEvent,
+  courseSharedEvent,
+
+  // New Course details page
+  lessonStarted,
+  lessonCompleted,
+  notesAdded,
+  savedNoteClicked,
+  globalNotesOpened,
+  attachmentOpened,
+  globalAttachmentOpened,
+  lessonSaved,
+  savedLessonOpened,
+  globalSavedLessonsOpened,
+  progressMilestoneShown
 }
