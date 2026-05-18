@@ -160,5 +160,7 @@ enum EventName {
   lessonSaved,
   savedLessonOpened,
   globalSavedLessonsOpened,
-  progressMilestoneShown
+  progressMilestoneShown,
+  audioModeOpened,
+  audioModeClosed,
 }
