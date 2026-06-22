@@ -13,7 +13,9 @@ class BrazeSdk {
   static BrazePlugin? get braze => _braze;
 
   static void initBraze() {
-    _braze = BrazePlugin();
+    _braze = BrazePlugin(
+      customConfigs: {replayCallbacksConfigKey: true},
+    );
     _braze!.enableSDK();
   }
 
