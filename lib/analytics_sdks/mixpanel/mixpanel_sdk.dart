@@ -18,7 +18,7 @@ class MixPanelSdk {
           trackAutomaticEvents: true);
 
     }else {
-      _mixPanelSdk = await Mixpanel.init('e5c9d92fd6fdf110e85a4fecf1fb0298',
+      _mixPanelSdk = await Mixpanel.init('a00d0aa23e868278584142eddfbdccfe',
         trackAutomaticEvents: true,
       );
     }
