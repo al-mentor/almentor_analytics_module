@@ -1,6 +1,5 @@
 enum EventName {
   userDataEvent,
-
   loginPageLoadedEvent,
   loginPageExitEvent,
   loginWithSocialClickedEvent,
@@ -80,6 +79,7 @@ enum EventName {
   plansPageViewedEvent,
   subscriptionCheckoutStartedEvent,
   subscriptionPlanChangedEvent,
+  paymentCancelledEvent,
 
   /// Clips
   clipsTabOpenedEvent,
@@ -90,6 +90,7 @@ enum EventName {
   clipLikedEvent,
   clipCtaClickedEvent,
   clipSharedEvent,
+  microLearnButtonClicked,
   signupBlockerOpenedEvent,
   signupBlockerClosedEvent,
   signupBlockerCTAClickedEvent,
@@ -106,16 +107,12 @@ enum EventName {
   downloadsExpiredEvent,
   expiredDownloadActivatedEvent,
   downloadsErrorEvent,
-
   searchInitiatedEvent,
   hasPipFeatureEvent,
-
   pipEnterdEvent,
   pipExitedEvent,
-
   certificateAddedToLinkedin,
   freeLessonPlayed,
-
   contentPageViewed,
 
   //authentication events
@@ -134,5 +131,36 @@ enum EventName {
   almentorAiChatQuerySentEvent,
   almentorAiChatRecommendationProvidedEvent,
   almentorAiChatNewChatStartedEvent,
-  continueWithPhoneClickedEvent
+  continueWithPhoneClickedEvent,
+
+  // Experiment events
+  discoverMoreClickedEvent,
+  appOpenedEvent,
+
+  // New Course promo page
+  promoOpened,
+  videoPlayed,
+  videoPaused,
+  videoEnded,
+  videoProgress,
+  videoError,
+  videoEnterFullScreen,
+  subscribeUnauthenticatedEvent,
+  subscribeNowEvent,
+  courseSharedEvent,
+
+  // New Course details page
+  lessonStarted,
+  lessonCompleted,
+  notesAdded,
+  savedNoteClicked,
+  globalNotesOpened,
+  attachmentOpened,
+  globalAttachmentOpened,
+  lessonSaved,
+  savedLessonOpened,
+  globalSavedLessonsOpened,
+  progressMilestoneShown,
+  audioModeOpened,
+  audioModeClosed,
 }

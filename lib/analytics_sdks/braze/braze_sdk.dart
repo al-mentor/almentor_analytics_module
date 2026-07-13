@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:almentor_analytics_module/analytics_sdks/user_data.dart';
 import 'package:almentor_analytics_module/event_name_mapper.dart';
 import 'package:almentor_analytics_module/events_name.dart';
@@ -5,20 +7,23 @@ import 'package:braze_plugin/braze_plugin.dart';
 
 class BrazeSdk {
   const BrazeSdk._();
+
   static BrazePlugin? _braze;
 
   static BrazePlugin? get braze => _braze;
 
   static void initBraze() {
-    _braze = BrazePlugin();
+    _braze = BrazePlugin(
+      customConfigs: {replayCallbacksConfigKey: true},
+    );
     _braze!.enableSDK();
   }
 
   static void logUser(UserData userData) {
-    if(_braze == null){
+    if (_braze == null) {
       initBraze();
     }
-    if (userData.userId ==null || userData.userId!.isEmpty) {
+    if (userData.userId == null || userData.userId!.isEmpty) {
       return;
     }
     _braze!.changeUser(userData.userId!);
@@ -60,9 +65,13 @@ class BrazeSdk {
     }
   }
 
-  static void  reset() {
+  static void reset() {}
 
-
+  static StreamSubscription<BrazeInAppMessage>? listenToInAppMessages(
+    void Function(BrazeInAppMessage message) onMessage,
+  ) {
+    return _braze?.subscribeToInAppMessages(onMessage)
+        as StreamSubscription<BrazeInAppMessage>?;
   }
 
   static void logBrazeEvent(
