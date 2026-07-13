@@ -14,9 +14,9 @@ class MixPanelSdk {
     if (prod) {
       _mixPanelSdk = await Mixpanel.init('df04c80eff821c07529540963fca1d83',
           trackAutomaticEvents: true);
-    } else {
-      _mixPanelSdk = await Mixpanel.init(
-        'e5c9d92fd6fdf110e85a4fecf1fb0298',
+
+    }else {
+      _mixPanelSdk = await Mixpanel.init('a00d0aa23e868278584142eddfbdccfe',
         trackAutomaticEvents: true,
       );
     }
