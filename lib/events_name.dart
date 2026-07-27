@@ -148,6 +148,7 @@ enum EventName {
   subscribeUnauthenticatedEvent,
   subscribeNowEvent,
   courseSharedEvent,
+  courseCompletedEvent,
 
   // New Course details page
   lessonStarted,
