@@ -50,6 +50,7 @@ enum EventName {
   courseLessonResumedEvent,
   courseSavedEvent,
   courseEnrollmentStartedEvent,
+  courseEnrollmentEvent,
   //userSignUpStartedEvent,
   userSignUpCompletedEvent,
   appDataDeviceTypeEvent,
