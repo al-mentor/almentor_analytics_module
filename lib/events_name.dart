@@ -49,7 +49,7 @@ enum EventName {
   courseCardClickedEvent,
   courseLessonResumedEvent,
   courseSavedEvent,
-  courseEnrollmentStartedEvent,
+  courseEnrollmentStartedEvent, // should be deleted new release
   courseEnrollmentEvent,
   //userSignUpStartedEvent,
   userSignUpCompletedEvent,
@@ -155,13 +155,20 @@ enum EventName {
   lessonStarted,
   lessonCompleted,
   notesAdded,
-  savedNoteClicked,
-  globalNotesOpened,
+  savedNoteClicked, // should be deleted new release
+  notePlayVideoClicked,
+  noteDeleted,
+  globalNotesOpened, // should be deleted new release
+  notesPagedOpened,
+  attachmentDownload,
   attachmentOpened,
-  globalAttachmentOpened,
+  globalAttachmentOpened, // should be deleted new release
+  attachmentPagedOpened,
   lessonSaved,
+  lessonUnsaved,
   savedLessonOpened,
-  globalSavedLessonsOpened,
+  globalSavedLessonsOpened, // should be deleted new release
+  savedLessonPagedOpened,
   progressMilestoneShown,
   audioModeOpened,
   audioModeClosed,
