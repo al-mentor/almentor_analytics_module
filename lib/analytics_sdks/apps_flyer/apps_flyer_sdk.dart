@@ -1,10 +1,7 @@
-import 'package:almentor_analytics_module/analytics_sdks/apps_flyer/apps_flyer_constant.dart'
-as constant;
 import 'package:almentor_analytics_module/analytics_sdks/user_data.dart';
 import 'package:almentor_analytics_module/event_name_mapper.dart';
 import 'package:almentor_analytics_module/events_name.dart';
 import 'package:appsflyer_sdk/appsflyer_sdk.dart';
-import 'package:flutter/foundation.dart';
 
 import 'apps_flyer_constant.dart';
 
@@ -14,7 +11,6 @@ class AppsFlyerSDK {
   static AppsflyerSdk? _appsflyerSdk;
 
   static AppsflyerSdk? get appsflyerSdk => _appsflyerSdk;
-
 
   static final AppsFlyerOptions appsFlyerOptionsProd = AppsFlyerOptions(
     afDevKey: AppsFlyerConstant.appsFlyerDevKey,
@@ -27,7 +23,6 @@ class AppsFlyerSDK {
     manualStart: false,
   );
 
-
   static final AppsFlyerOptions appsFlyerOptionsStage = AppsFlyerOptions(
     afDevKey: AppsFlyerConstant.appsFlyerDevKey,
     appId: AppsFlyerConstant.getAppStageID(),
@@ -38,7 +33,6 @@ class AppsFlyerSDK {
     disableCollectASA: true,
     manualStart: false,
   );
-
 
   static void logUser(UserData userData) {
     if (userData.userId != null) {
@@ -60,18 +54,29 @@ class AppsFlyerSDK {
       registerConversionDataCallback: true,
       registerOnAppOpenAttributionCallback: true,
       registerOnDeepLinkingCallback: true,
-
     );
   }
 
+  /// Clears the identity we attached to the AppsFlyer session (called on
+  /// logout).
+  ///
+  /// Deliberately does not call `setUserEmails([])`: on Android the SDK builds
+  /// its emails JSONObject with a key that is only assigned while iterating the
+  /// emails array, so an empty array leaves that key null and
+  /// `new JSONObject(map)` throws `NullPointerException: key == null`
+  /// (Sentry FLUTTER-ZF-1CD). AppsFlyer offers no supported way to clear the
+  /// stored emails, and the empty call never cleared them anyway — it only
+  /// threw. Clearing the customer user id is what actually de-identifies the
+  /// session.
   static void rest() {
     _appsflyerSdk!.setCustomerUserId("");
-    _appsflyerSdk!.setUserEmails([]);
     _appsflyerSdk!.setAdditionalData({});
   }
 
-  static Future<void> logAppsFlyerEvent(EventName eventName,
-      dynamic eventValue,) async {
+  static Future<void> logAppsFlyerEvent(
+    EventName eventName,
+    dynamic eventValue,
+  ) async {
     await _appsflyerSdk!.logEvent(
       eventName.convertToSnakeCase,
       eventValue,
