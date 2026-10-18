@@ -172,4 +172,11 @@ enum EventName {
   progressMilestoneShown,
   audioModeOpened,
   audioModeClosed,
+
+  // Course flashcards
+  flashcardsPagedOpened,
+  flashcardOpened,
+  flashcardViewed,
+  flashcardFlipped,
+  flashcardLockedTapped,
 }
