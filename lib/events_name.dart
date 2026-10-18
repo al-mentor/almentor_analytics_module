@@ -159,22 +159,22 @@ enum EventName {
   notePlayVideoClicked,
   noteDeleted,
   globalNotesOpened, // should be deleted new release
-  notesPagedOpened,
+  notesPageOpened,
   attachmentDownload,
   attachmentOpened,
   globalAttachmentOpened, // should be deleted new release
-  attachmentPagedOpened,
+  attachmentPageOpened,
   lessonSaved,
   lessonUnsaved,
   savedLessonOpened,
   globalSavedLessonsOpened, // should be deleted new release
-  savedLessonPagedOpened,
+  savedLessonPageOpened,
   progressMilestoneShown,
   audioModeOpened,
   audioModeClosed,
 
   // Course flashcards
-  flashcardsPagedOpened,
+  flashcardsPageOpened,
   flashcardOpened,
   flashcardViewed,
   flashcardFlipped,
