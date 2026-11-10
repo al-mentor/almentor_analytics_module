@@ -96,6 +96,16 @@ enum EventName {
   signupBlockerClosedEvent,
   signupBlockerCTAClickedEvent,
 
+  /// Home floating button
+  /// Sent as `floating_button_clicked` when the user taps the dynamic home
+  /// floating button, whatever destination it points at.
+  floatingButtonClicked,
+
+  /// Podcasts
+  /// Sent as `podcasts_hub_viewed` every time the Podcasts Hub screen opens,
+  /// from any entry point.
+  podcastsHubViewed,
+
   /// Downloads
   courseDownloadInitiatedEvent,
   courseDownloadCompletedEvent,
