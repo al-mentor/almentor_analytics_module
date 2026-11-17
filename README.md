@@ -2,7 +2,7 @@
 
 Streamline analytics integration in your Flutter app effortlessly!The
 `almentor_analytics_module` package provides a hassle-free way to seamlessly
-integrate popular analytics SDKs like Firebase, AppsFlyer, Mixpanel and SmartLock.
+integrate popular analytics SDKs like Firebase, Mixpanel, Braze and Meta App Events.
 Harness the power of data-driven insights without the complexity. Analyze,
 optimize, and grow your app with ease.
 
@@ -58,10 +58,6 @@ This provides flexibility and customization for your event tracking needs.
 - `allowFirebaseEvents` (default: `true`): Controls whether Firebase Analytics events are allowed.
   Set to `true` to enable Firebase Analytics event tracking or `false` to disable it.
 
-- `allowAppsFlyerEvent` (default: `false`): Controls whether AppsFlyer events are allowed. Set
-  to `true` to enable AppsFlyer event tracking or `false` to disable it. This feature is dependent
-  on the presence of the AppsFlyer SDK in your project.
-
 - `allowMixpanelEvent` (default: `false`): Controls whether Mixpanel events are allowed. Set
   to `true` to enable Mixpanel event tracking or `false` to disable it. This feature is dependent on
   the presence of the Mixpanel SDK in your project.
@@ -107,19 +103,39 @@ submitEvent(
     'key': 'value',
   },
   allowFirebaseEvents: true,
-  allowAppsFlyerEvent: true,
   allowMixpanelEvent: true,
+  allowBrazeEvent: true,
 );
 ```
 
-In this example, the `myEvent` event will be tracked using Firebase Analytics, AppsFlyer, and
-Mixpanel, as all three SDKs are enabled. You can customize which SDKs track the event by adjusting
-the `allowFirebaseEvents`, `allowAppsFlyerEvent`, and `allowMixpanelEvent` parameters.
+In this example, the `myEvent` event will be tracked using Firebase Analytics, Mixpanel and Braze,
+as all three SDKs are enabled. You can customize which SDKs track the event by adjusting
+the `allowFirebaseEvents`, `allowMixpanelEvent`, and `allowBrazeEvent` parameters.
 
 This function provides you with the flexibility to selectively use different analytics and tracking
 tools based on your project requirements.
 
+### Meta (Facebook) App Events
+
+Meta Ads Manager events are sent with `submitMetaEvent`, separately from `submitEvent`:
+
+```sh
+AlmentorAnalyticsModule.instance.submitMetaEvent(
+  MetaEvent.purchase,
+  contentId: planId,
+  contentType: 'annual',
+  value: 99.99,
+  currency: 'USD',
+);
+```
+
+- Only sent in prod (`init(prod: true)`).
+- Sent right away. Events of `Business` (B2B) users are dropped once `logUser` has identified them.
+  On iOS the Facebook SDK reads the tracking permission itself and sends limited data when tracking
+  isn't allowed.
+- `logUser` attaches the user id, email, phone and first name of `Consumer` users; `reset` clears them.
+
 **Important Note:**
 At the moment, our Flutter analytics package exclusively integrates with Firebase Analytics,
-AppsFlyer and Mixpanel. We're committed to providing you with a comprehensive analytics solution,
+Mixpanel, Braze and Meta App Events. We're committed to providing you with a comprehensive analytics solution,
 and we have plans to include support for additional analytics like SmartLock, in future updates.
