@@ -145,7 +145,7 @@ void main() {
   group('user', () {
     setUp(() => MetaSdk.initMeta(true));
 
-    test('attaches the identity of a consumer', () async {
+    test('attaches the identity of a consumer without the display name', () async {
       await logUserOfType(MetaSdk.consumerUserType);
 
       expect(calls, [
@@ -154,7 +154,6 @@ void main() {
           'setUserData',
           arguments: {
             'email': 'a@almentor.net',
-            'firstName': 'Ali',
             'phone': '+201000000000',
           },
         ),
