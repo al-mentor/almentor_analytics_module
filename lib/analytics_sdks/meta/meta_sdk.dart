@@ -37,7 +37,6 @@ class MetaSdk {
     await appEvents.setUserData(
       email: userData.email,
       phone: userData.phoneNumber,
-      firstName: userData.userName,
     );
   }
 
