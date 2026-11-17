@@ -8,7 +8,8 @@ enum MetaEvent {
   addToCart('fb_mobile_add_to_cart'),
   initiateCheckout('fb_mobile_initiated_checkout'),
   completeRegistration('fb_mobile_complete_registration'),
-  purchase('fb_mobile_purchase');
+  purchase('fb_mobile_purchase'),
+  subscriptionFailed('SubscriptionFailed');
 
   const MetaEvent(this.fbName);
 
