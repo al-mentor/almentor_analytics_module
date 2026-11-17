@@ -1,6 +1,6 @@
 name: almentor_analytics_module
 description: Analytics Flutter Package
-version: 0.0.14
+version: 0.1.0
 homepage:
 
 environment:
@@ -12,7 +12,8 @@ dependencies:
     sdk: flutter
   firebase_analytics: ^12.0.4 #36 days ago - 10-12-2025
   firebase_core: ^4.2.1 #36 days ago - 10-12-2025
-  appsflyer_sdk: ^6.17.7+1 #38 days ago - 10-12-2025
+  # 0.32+ needs Facebook SDK 19; flutter_facebook_auth is still on 18.
+  facebook_app_events: 0.31.1
   mixpanel_flutter: ^2.4.4 #6 months ago - 10-12-2025
   braze_plugin: ^19.0.0 #25 days ago - 9-6-2025
   app_tracking_transparency: ^2.0.6  #latest - 10-12-2025

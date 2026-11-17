@@ -5,12 +5,9 @@ class EventModule {
   dynamic eventValue;
   int count;
   bool isFirebaseAllowed;
-  bool isAppsFlyerAllowed;
   bool isMixPanelAllowed;
   bool isBrazeAllowed;
 
-
-
   EventModule(this.eventName, this.eventValue, this.count,
-      this.isFirebaseAllowed, this.isAppsFlyerAllowed, this.isMixPanelAllowed, this.isBrazeAllowed);
+      this.isFirebaseAllowed, this.isMixPanelAllowed, this.isBrazeAllowed);
 }

@@ -1,7 +1,8 @@
 library almentor_analytics_module;
 
-import 'package:almentor_analytics_module/analytics_sdks/apps_flyer/apps_flyer_sdk.dart';
 import 'package:almentor_analytics_module/analytics_sdks/braze/braze_sdk.dart';
+import 'package:almentor_analytics_module/analytics_sdks/meta/meta_event.dart';
+import 'package:almentor_analytics_module/analytics_sdks/meta/meta_sdk.dart';
 import 'package:almentor_analytics_module/analytics_sdks/mixpanel/mixpanel_sdk.dart';
 import 'package:almentor_analytics_module/analytics_sdks/user_data.dart';
 import 'package:almentor_analytics_module/event_module.dart';
@@ -36,8 +37,7 @@ class AlmentorAnalyticsModule {
     await Future.delayed(const Duration(seconds: 2));
     final status = await AppTrackingTransparency.trackingAuthorizationStatus;
     if (status != TrackingStatus.authorized) {
-      final status =
-          await AppTrackingTransparency.requestTrackingAuthorization();
+      await AppTrackingTransparency.requestTrackingAuthorization();
     }
   }
 
@@ -50,7 +50,7 @@ class AlmentorAnalyticsModule {
 
   Future<void> intSDK(bool prod) async {
     try {
-      await AppsFlyerSDK.initAppsFlyer(prod);
+      MetaSdk.initMeta(prod);
     } catch (error, stackTrace) {
       AlmentorAnalyticsModule.onError!(error, stackTrace);
     }
@@ -76,7 +76,6 @@ class AlmentorAnalyticsModule {
     required EventName eventName,
     dynamic eventValue,
     bool allowFirebaseEvents = true,
-    bool allowAppsFlyerEvent = false,
     bool allowMixpanelEvent = false,
     bool allowBrazeEvent = false,
   }) async {
@@ -89,16 +88,6 @@ class AlmentorAnalyticsModule {
           eventValue: isEventValueValidMap(eventValue)
               ? Map<String, Object>.from(eventValue)
               : null,
-        );
-      } catch (error, stackTrace) {
-        AlmentorAnalyticsModule.onError!(error, stackTrace);
-      }
-    }
-    if (allowAppsFlyerEvent && AppsFlyerSDK.appsflyerSdk != null) {
-      try {
-        AppsFlyerSDK.logAppsFlyerEvent(
-          eventName,
-          isEventValueValidMap(eventValue) ? eventValue : null,
         );
       } catch (error, stackTrace) {
         AlmentorAnalyticsModule.onError!(error, stackTrace);
@@ -130,7 +119,7 @@ class AlmentorAnalyticsModule {
 
     try {
       updateEventsList(eventName, eventValue, allowFirebaseEvents,
-          allowAppsFlyerEvent, allowMixpanelEvent, allowBrazeEvent);
+          allowMixpanelEvent, allowBrazeEvent);
     } catch (ex) {
       print(ex);
     }
@@ -195,7 +184,6 @@ class AlmentorAnalyticsModule {
   Future<void> logUser(
     UserData userData, {
     bool allowFirebaseEvents = true,
-    bool allowAppsFlyerEvent = true,
     bool allowMixpanelEvent = true,
     bool allowBrazeEvent = true,
   }) async {
@@ -209,9 +197,8 @@ class AlmentorAnalyticsModule {
       AlmentorAnalyticsModule.onError!(error, stackTrace);
     }
     try {
-      if (allowAppsFlyerEvent) {
-        AppsFlyerSDK.logUser(userData);
-      }
+      // Always called: Meta needs the user type to drop B2B events.
+      await MetaSdk.logUser(userData);
     } catch (error, stackTrace) {
       AlmentorAnalyticsModule.onError!(error, stackTrace);
     }
@@ -234,10 +221,35 @@ class AlmentorAnalyticsModule {
       eventName: EventName.userDataEvent,
       eventValue: userData.toJson(),
       allowFirebaseEvents: allowFirebaseEvents,
-      allowAppsFlyerEvent: allowAppsFlyerEvent,
       allowMixpanelEvent: allowMixpanelEvent,
       allowBrazeEvent: allowBrazeEvent,
     );
+  }
+
+  /// Sends [event] to Meta Ads Manager. See [MetaSdk] for when it is
+  /// dropped. A [MetaEvent.purchase] needs [value] and [currency].
+  Future<void> submitMetaEvent(
+    MetaEvent event, {
+    String? contentId,
+    String? contentType,
+    double? value,
+    String? currency,
+    String? registrationMethod,
+    Map<String, Object>? parameters,
+  }) async {
+    try {
+      await MetaSdk.log(
+        event,
+        contentId: contentId,
+        contentType: contentType,
+        value: value,
+        currency: currency,
+        registrationMethod: registrationMethod,
+        parameters: parameters,
+      );
+    } catch (error, stackTrace) {
+      AlmentorAnalyticsModule.onError!(error, stackTrace);
+    }
   }
 
   Future<void> submitFirebaseAnalyticsEvent({
@@ -262,7 +274,6 @@ class AlmentorAnalyticsModule {
     EventName eventName,
     dynamic eventValue,
     bool isFirebaseAllowed,
-    bool isAppsFlyerAllowed,
     bool isMixPanelAllowed,
     bool isBrazeAllowed,
   ) {
@@ -275,7 +286,7 @@ class AlmentorAnalyticsModule {
     } else {
       submittedEvents.add(
         EventModule(eventName, eventValue, 1, isFirebaseAllowed,
-            isAppsFlyerAllowed, isMixPanelAllowed, isBrazeAllowed),
+            isMixPanelAllowed, isBrazeAllowed),
       );
     }
   }
@@ -287,7 +298,7 @@ class AlmentorAnalyticsModule {
   void reset() {
     MixPanelSdk.rest();
     BrazeSdk.reset();
-    AppsFlyerSDK.rest();
+    MetaSdk.reset().catchError(AlmentorAnalyticsModule.onError!);
     FirebaseAnalytics.instance.resetAnalyticsData();
   }
 }
