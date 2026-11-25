@@ -77,6 +77,24 @@ void main() {
       expect(identifiedIds(), isEmpty);
     });
 
+    for (final blankId in ['', ' ']) {
+      test('reports the blank ID "$blankId" to onError', () async {
+        await AlmentorAnalyticsModule.instance.identifyMixpanelUser(blankId);
+
+        expect(errors, [isA<ArgumentError>()]);
+        expect(calls, isEmpty);
+      });
+    }
+
+    test('reports a call before Mixpanel is initialised to onError', () async {
+      MixPanelSdk.resetForTesting();
+
+      await AlmentorAnalyticsModule.instance.identifyMixpanelUser(userId);
+
+      expect(errors, [isA<StateError>()]);
+      expect(calls, isEmpty);
+    });
+
     for (final method in ['getDistinctId', 'identify']) {
       test('reports a failed $method to onError', () async {
         failingMethod = method;

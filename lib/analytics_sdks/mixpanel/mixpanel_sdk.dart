@@ -1,6 +1,7 @@
 import 'package:almentor_analytics_module/analytics_sdks/user_data.dart';
 import 'package:almentor_analytics_module/event_name_mapper.dart';
 import 'package:almentor_analytics_module/events_name.dart';
+import 'package:flutter/foundation.dart';
 import 'package:mixpanel_flutter/mixpanel_flutter.dart';
 
 class MixPanelSdk {
@@ -52,5 +53,10 @@ class MixPanelSdk {
 
   static void rest() {
     _mixPanelSdk?.reset();
+  }
+
+  @visibleForTesting
+  static void resetForTesting() {
+    _mixPanelSdk = null;
   }
 }
