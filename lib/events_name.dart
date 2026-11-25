@@ -82,6 +82,15 @@ enum EventName {
   subscriptionPlanChangedEvent,
   paymentCancelledEvent,
 
+  /// Guest checkout (pay before signing up)
+  /// `guest_checkout_identity_submitted`: the email / phone step succeeded,
+  /// a guest account was created or an existing one recognised.
+  guestCheckoutIdentitySubmittedEvent,
+
+  /// `guest_checkout_account_activated`: a guest account was activated
+  /// (code + password).
+  guestCheckoutAccountActivatedEvent,
+
   /// Clips
   clipsTabOpenedEvent,
   clipServedEvent,
