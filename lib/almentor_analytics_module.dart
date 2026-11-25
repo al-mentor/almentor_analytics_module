@@ -196,7 +196,7 @@ class AlmentorAnalyticsModule {
       }
       await MixPanelSdk.identifyUser(userId);
     } catch (error, stackTrace) {
-      AlmentorAnalyticsModule.onError!(error, stackTrace);
+      AlmentorAnalyticsModule.onError?.call(error, stackTrace);
     }
   }
 

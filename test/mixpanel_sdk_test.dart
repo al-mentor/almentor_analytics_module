@@ -95,6 +95,16 @@ void main() {
       expect(calls, isEmpty);
     });
 
+    test('completes when identify fails and there is no onError', () async {
+      AlmentorAnalyticsModule.onError = null;
+      failingMethod = 'identify';
+
+      await expectLater(
+        AlmentorAnalyticsModule.instance.identifyMixpanelUser(userId),
+        completes,
+      );
+    });
+
     for (final method in ['getDistinctId', 'identify']) {
       test('reports a failed $method to onError', () async {
         failingMethod = method;
