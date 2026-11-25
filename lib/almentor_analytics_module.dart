@@ -181,6 +181,17 @@ class AlmentorAnalyticsModule {
   void incrementByMixpanel({required String prop,required double value}){
     MixPanelSdk.incrementByMixpanel(prop: prop, value: value);
   }
+  /// Mixpanel only: links the anonymous ID to [userId] as soon as an account
+  /// exists, before its user data is known (guest checkout). Errors go to
+  /// [onError], as for the other calls.
+  Future<void> identifyMixpanelUser(String userId) async {
+    try {
+      await MixPanelSdk.identifyUser(userId);
+    } catch (error, stackTrace) {
+      AlmentorAnalyticsModule.onError!(error, stackTrace);
+    }
+  }
+
   Future<void> logUser(
     UserData userData, {
     bool allowFirebaseEvents = true,

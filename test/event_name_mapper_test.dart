@@ -19,5 +19,20 @@ void main() {
         'podcasts_hub_viewed',
       );
     });
+
+    test('sends the guest identity step as guest_checkout_identity_submitted',
+        () {
+      expect(
+        EventName.guestCheckoutIdentitySubmittedEvent.convertToSnakeCase,
+        'guest_checkout_identity_submitted',
+      );
+    });
+
+    test('sends the guest activation as guest_checkout_account_activated', () {
+      expect(
+        EventName.guestCheckoutAccountActivatedEvent.convertToSnakeCase,
+        'guest_checkout_account_activated',
+      );
+    });
   });
 }

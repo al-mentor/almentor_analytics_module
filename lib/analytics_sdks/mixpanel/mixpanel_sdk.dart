@@ -24,11 +24,17 @@ class MixPanelSdk {
   }
 
   static logUser(UserData userData) async {
-    final userDistinctId = await _mixPanelSdk?.getDistinctId();
     _mixPanelSdk?.registerSuperProperties(userData.toJson());
-    if (userDistinctId != userData.userId && userData.userId != null) {
-      _mixPanelSdk?.identify(userData.userId!);
-    }
+    final userId = userData.userId;
+    if (userId != null) await identifyUser(userId);
+  }
+
+  /// Links this device's anonymous Mixpanel ID to [userId] without sending
+  /// user properties, so events before and after an account is created count
+  /// as one person (`identify` merges them under ID merge, as at log-in).
+  static Future<void> identifyUser(String userId) async {
+    final distinctId = await _mixPanelSdk?.getDistinctId();
+    if (distinctId != userId) await _mixPanelSdk?.identify(userId);
   }
 
   static void incrementByMixpanel(
